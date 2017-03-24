@@ -13,16 +13,19 @@ class GameScene: SKScene {
     
     let gcManager = GameCenterManager.sharedInstance
     let audioManager = AudioManager.sharedInstance
+    let runnerCamera = SKCameraNode()
 
     var lastUpdateTime: TimeInterval = 0
-    var runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: 40, height: 40), name: "runner1", number: 1)
-    var runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: 40, height: 40), name: "runner2", number: 2)
+    var runner1 = Runner(texture: SKTexture(imageNamed: "Runner"), color: SKColor.red, size: CGSize(width: 80, height: 80), name: "runner1", number: 1, team: Team())
+    var runner2 = Runner(texture: SKTexture(imageNamed: "Runner"), color: SKColor.red, size: CGSize(width: 80, height: 80), name: "runner1", number: 1, team: Team())
     var runners: [Runner]?
-    
+
     // MARK: Init
     override func didMove(to view: SKView) {
-        lastUpdateTime = 0
         audioManager.playBackgroundMusic(filename: "Dreamcatcher")
+        camera = runnerCamera
+        lastUpdateTime = 0
+
         
         setupRunners()
     }
@@ -32,16 +35,20 @@ class GameScene: SKScene {
         
         for runner in runners! {
             runner.physicsBody = SKPhysicsBody(rectangleOf: runner.size)
+            runner.physicsBody?.affectedByGravity = true
+            runner.physicsBody?.allowsRotation = false
             
             if runner == runner1 {
-                runner.position = CGPoint(x: 150, y: 200)
+                runner.position = CGPoint(x: 100, y: 200)
             }
             else {
-                runner.position = CGPoint(x: 100, y: 200)
+                runner.position = CGPoint(x: 0, y: 200)
             }
             
             addChild(runner)
         }
+        
+        runner1.addChild(runnerCamera)
     }
     
     // MARK: Update Loop
@@ -65,32 +72,32 @@ class GameScene: SKScene {
     
     private func updateRunnerPositions(dt: TimeInterval) {
         for runner in runners! {
-            runner.position.x += 5
+           runner.position.x += 5
         }
     }
     
     // MARK: Input
-    var force: CGFloat = 0.0
+    var initialJumpY: CGFloat?
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        force = 0
-
-        let timerAction = SKAction.wait(forDuration: 1.0)
-        let update = SKAction.run {
-            if self.force < 100.0 {
-                self.force += 1.0
-            }
+        if initialJumpY == nil {
+            initialJumpY = runner1.position.y
         }
-        let sequence = SKAction.sequence([timerAction, update])
-        let calculateJumpForce = SKAction.repeatForever(sequence)
         
-        run(calculateJumpForce, withKey:"calculateJumpForce")
+        if (runner1.position.y - initialJumpY!) < 600 {
+            runner1.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
+        }
+        else {
+            runner1.physicsBody?.velocity.dy = 0.0
+        }
+        
+        //self.onGround = false
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {}
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        removeAction(forKey: "repeatAction")
-        runner1.physicsBody?.applyImpulse(CGVector(dx: 0, dy: force))
+        //runner1.physicsBody?.velocity.dy = 0.0
+        initialJumpY = nil
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {}
