@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 class Runner : Player {
     // MARK: - Variables
     var currentSpeed: Double = Constants.playerSpeed
     var onGround : Bool = true
-    var lastSafePosition : Point?
+    var lastSafePosition : CGPoint?
     var speedBoostEnabled = false
     
     var boostSpeed: Double {
