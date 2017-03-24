@@ -10,8 +10,6 @@ import Foundation
 
 class Team {
     
-    let runner : Runner = Runner()
-    let builder : Builder = Builder()
     private var coins = 0
     var time = 0
     
