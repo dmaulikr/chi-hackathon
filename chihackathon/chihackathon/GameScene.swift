@@ -20,8 +20,10 @@ class GameScene: SKScene {
     var runner2 = Runner(texture: SKTexture(imageNamed: "Runner"), color: SKColor.red, size: CGSize(width: 80, height: 80), name: "runner1", number: 1, team: Team())
     var runners: [Runner]?
 
-    let soundCoin = SKAction.playSoundFileNamed("CoinPickup.mp3",
-                                                waitForCompletion: false)
+    //Sounds
+    let soundCoin = SKAction.playSoundFileNamed("CoinPickup.mp3", waitForCompletion: true)
+    let soundJump = SKAction.playSoundFileNamed("Jump.mp3", waitForCompletion: true)
+    let soundPowerup = SKAction.playSoundFileNamed("Powerup.mp3", waitForCompletion: true)
     
     // MARK: Init
     override func didMove(to view: SKView) {
@@ -36,6 +38,16 @@ class GameScene: SKScene {
     private func onCoinPickup(runner: Runner){
         runner.pickUpCoin()
         run(soundCoin)
+    }
+    
+    private func onSpeedBoostPickup(runner: Runner){
+        runner.applySpeedBoost()
+        run(soundPowerup)
+    }
+    
+    private func onJumpBoostPickup(runner: Runner){
+        runner.applyJumpBoost()
+        run(soundPowerup)
     }
     
     private func setupRunners() {
@@ -88,6 +100,7 @@ class GameScene: SKScene {
     var initialJumpY: CGFloat?
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if initialJumpY == nil {
+            run(soundJump)
             initialJumpY = runner1.position.y
         }
         
