@@ -18,8 +18,8 @@
 		808796691E858270005B3BF8 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808796681E858270005B3BF8 /* Team.swift */; };
 		D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025C81E857A73008A9E85 /* BackgroundAudio.swift */; };
 		D20025CB1E857B41008A9E85 /* Dreamcatcher.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */; };
-		D20025CF1E858274008A9E85 /* runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025CE1E858274008A9E85 /* runner.swift */; };
-		D20025D11E858461008A9E85 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025D01E858461008A9E85 /* constants.swift */; };
+		D20025CF1E858274008A9E85 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025CE1E858274008A9E85 /* Runner.swift */; };
+		D20025D11E858461008A9E85 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025D01E858461008A9E85 /* Constants.swift */; };
 		D4DF673B1E8582550013C8A2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF673A1E8582550013C8A2 /* Player.swift */; };
 		D4DF673D1E858A260013C8A2 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF673C1E858A260013C8A2 /* Builder.swift */; };
 /* End PBXBuildFile section */
@@ -38,8 +38,8 @@
 		808796681E858270005B3BF8 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		D20025C81E857A73008A9E85 /* BackgroundAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAudio.swift; sourceTree = "<group>"; };
 		D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Dreamcatcher.mp3; path = chihackathon/Dreamcatcher.mp3; sourceTree = "<group>"; };
-		D20025CE1E858274008A9E85 /* runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = runner.swift; sourceTree = "<group>"; };
-		D20025D01E858461008A9E85 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		D20025CE1E858274008A9E85 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
+		D20025D01E858461008A9E85 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D4DF673A1E8582550013C8A2 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		D4DF673C1E858A260013C8A2 /* Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,7 +95,7 @@
 				3CF4FF151E856B7E00E192CB /* Assets.xcassets */,
 				3CF4FF171E856B7E00E192CB /* LaunchScreen.storyboard */,
 				3CF4FF1A1E856B7E00E192CB /* Info.plist */,
-				D20025D01E858461008A9E85 /* constants.swift */,
+				D20025D01E858461008A9E85 /* Constants.swift */,
 			);
 			path = chihackathon;
 			sourceTree = "<group>";
@@ -111,7 +111,7 @@
 		D20025CD1E858202008A9E85 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
-				D20025CE1E858274008A9E85 /* runner.swift */,
+				D20025CE1E858274008A9E85 /* Runner.swift */,
 				808796681E858270005B3BF8 /* Team.swift */,
 				D4DF673A1E8582550013C8A2 /* Player.swift */,
 				D4DF673C1E858A260013C8A2 /* Builder.swift */,
@@ -203,11 +203,11 @@
 				3CF4FF111E856B7E00E192CB /* GameViewController.swift in Sources */,
 				D4DF673D1E858A260013C8A2 /* Builder.swift in Sources */,
 				D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */,
-				D20025CF1E858274008A9E85 /* runner.swift in Sources */,
+				D20025CF1E858274008A9E85 /* Runner.swift in Sources */,
 				808796691E858270005B3BF8 /* Team.swift in Sources */,
 				D4DF673B1E8582550013C8A2 /* Player.swift in Sources */,
 				3CF4FF091E856B7E00E192CB /* AppDelegate.swift in Sources */,
-				D20025D11E858461008A9E85 /* constants.swift in Sources */,
+				D20025D11E858461008A9E85 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
