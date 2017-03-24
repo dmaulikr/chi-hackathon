@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C4A7A211E85A2180032C7F2 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A7A201E85A2180032C7F2 /* Coin.swift */; };
+		3C4A7A231E85A22D0032C7F2 /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A7A221E85A22D0032C7F2 /* Wall.swift */; };
+		3C4A7A251E85A23D0032C7F2 /* SpeedBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A7A241E85A23D0032C7F2 /* SpeedBoost.swift */; };
+		3C4A7A271E85A2490032C7F2 /* JumpBoost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A7A261E85A2490032C7F2 /* JumpBoost.swift */; };
+		3C4A7A291E85A2570032C7F2 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A7A281E85A2570032C7F2 /* Platform.swift */; };
+		3C4A7A2B1E85A26F0032C7F2 /* Missile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A7A2A1E85A26F0032C7F2 /* Missile.swift */; };
+		3C4A7A2D1E85A2D90032C7F2 /* SpeedTrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A7A2C1E85A2D90032C7F2 /* SpeedTrap.swift */; };
 		3C6AA8CD1E85837F00036772 /* GameCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA8CC1E85837F00036772 /* GameCenterManager.swift */; };
 		3C6AA8D01E85865E00036772 /* GameNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA8CF1E85865E00036772 /* GameNavigationController.swift */; };
 		3CE3D4731E85751700BAB456 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE3D4721E85751700BAB456 /* GameKit.framework */; };
@@ -27,6 +34,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C4A7A201E85A2180032C7F2 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		3C4A7A221E85A22D0032C7F2 /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		3C4A7A241E85A23D0032C7F2 /* SpeedBoost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedBoost.swift; sourceTree = "<group>"; };
+		3C4A7A261E85A2490032C7F2 /* JumpBoost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpBoost.swift; sourceTree = "<group>"; };
+		3C4A7A281E85A2570032C7F2 /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		3C4A7A2A1E85A26F0032C7F2 /* Missile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Missile.swift; sourceTree = "<group>"; };
+		3C4A7A2C1E85A2D90032C7F2 /* SpeedTrap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedTrap.swift; sourceTree = "<group>"; };
 		3C6AA8CC1E85837F00036772 /* GameCenterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCenterManager.swift; sourceTree = "<group>"; };
 		3C6AA8CF1E85865E00036772 /* GameNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameNavigationController.swift; sourceTree = "<group>"; };
 		3CE3D4721E85751700BAB456 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -60,6 +74,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C4A7A2E1E85A2F50032C7F2 /* Interactables */ = {
+			isa = PBXGroup;
+			children = (
+				3C4A7A201E85A2180032C7F2 /* Coin.swift */,
+				3C4A7A281E85A2570032C7F2 /* Platform.swift */,
+				3C4A7A261E85A2490032C7F2 /* JumpBoost.swift */,
+				3C4A7A241E85A23D0032C7F2 /* SpeedBoost.swift */,
+				3C4A7A221E85A22D0032C7F2 /* Wall.swift */,
+				3C4A7A2A1E85A26F0032C7F2 /* Missile.swift */,
+				3C4A7A2C1E85A2D90032C7F2 /* SpeedTrap.swift */,
+			);
+			name = Interactables;
+			sourceTree = "<group>";
+		};
 		3C6AA8CE1E85838C00036772 /* Data Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,10 +178,11 @@
 			isa = PBXGroup;
 			children = (
 				3CF4FF0E1E856B7E00E192CB /* GameScene.swift */,
-				D20025CE1E858274008A9E85 /* Runner.swift */,
 				808796681E858270005B3BF8 /* Team.swift */,
 				D4DF673A1E8582550013C8A2 /* Player.swift */,
+				D20025CE1E858274008A9E85 /* Runner.swift */,
 				D4DF673C1E858A260013C8A2 /* Builder.swift */,
+				3C4A7A2E1E85A2F50032C7F2 /* Interactables */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -242,12 +271,19 @@
 				3C6AA8D01E85865E00036772 /* GameNavigationController.swift in Sources */,
 				3CF4FF111E856B7E00E192CB /* GameViewController.swift in Sources */,
 				D4DF673D1E858A260013C8A2 /* Builder.swift in Sources */,
+				3C4A7A231E85A22D0032C7F2 /* Wall.swift in Sources */,
 				D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */,
 				3C6AA8CD1E85837F00036772 /* GameCenterManager.swift in Sources */,
+				3C4A7A251E85A23D0032C7F2 /* SpeedBoost.swift in Sources */,
+				3C4A7A2D1E85A2D90032C7F2 /* SpeedTrap.swift in Sources */,
+				3C4A7A211E85A2180032C7F2 /* Coin.swift in Sources */,
 				D20025CF1E858274008A9E85 /* Runner.swift in Sources */,
+				3C4A7A271E85A2490032C7F2 /* JumpBoost.swift in Sources */,
 				808796691E858270005B3BF8 /* Team.swift in Sources */,
 				D4DF673B1E8582550013C8A2 /* Player.swift in Sources */,
+				3C4A7A2B1E85A26F0032C7F2 /* Missile.swift in Sources */,
 				3CF4FF091E856B7E00E192CB /* AppDelegate.swift in Sources */,
+				3C4A7A291E85A2570032C7F2 /* Platform.swift in Sources */,
 				D20025D11E858461008A9E85 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
