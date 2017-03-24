@@ -190,7 +190,7 @@
 				TargetAttributes = {
 					3CF4FF041E856B7E00E192CB = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = L3PXB36C98;
+						DevelopmentTeam = HAUK6XZ7SD;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
@@ -370,11 +370,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = L3PXB36C98;
+				DEVELOPMENT_TEAM = HAUK6XZ7SD;
 				INFOPLIST_FILE = chihackathon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sapientnitro.inhouse.chihackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sapient.chihackathon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -385,11 +385,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = L3PXB36C98;
+				DEVELOPMENT_TEAM = HAUK6XZ7SD;
 				INFOPLIST_FILE = chihackathon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sapientnitro.inhouse.chihackathon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sapient.chihackathon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
