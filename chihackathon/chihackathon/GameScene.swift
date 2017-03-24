@@ -9,6 +9,17 @@
 import SpriteKit
 import GameplayKit
 
+struct PhysicsCategory {
+    static let None: UInt32 = 0
+    static let Coin: UInt32 = 0b1 // 1
+    static let Platform: UInt32 = 0b10 // 2
+    static let JumpBoost: UInt32 = 0b100 // 4
+    static let SpeedBoost: UInt32 = 0b1000 // 8
+    static let Wall: UInt32 = 0b10000 // 16
+    static let Missile: UInt32 = 0b100000 // 32
+    static let SpeedTrap: UInt32 = 0b1000000 // 64
+}
+
 class GameScene: SKScene {
     
     let gcManager = GameCenterManager.sharedInstance
