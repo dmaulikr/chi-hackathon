@@ -12,7 +12,7 @@ class Team {
     
     let runner : Runner = Runner()
     let builder : Builder = Builder()
-    var coins = 0
+    private var coins = 0
     var time = 0
     
     enum color {
@@ -24,4 +24,11 @@ class Team {
         case purple
     }
     
+    func getCoins() -> Int {
+        return self.coins
+    }
+    
+    func deductCoins(coinsToDeduct: Int) {
+        self.coins = self.coins - coinsToDeduct
+    }
 }

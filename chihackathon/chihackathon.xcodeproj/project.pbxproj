@@ -19,6 +19,7 @@
 		D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025C81E857A73008A9E85 /* BackgroundAudio.swift */; };
 		D20025CB1E857B41008A9E85 /* Dreamcatcher.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */; };
 		D4DF673B1E8582550013C8A2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF673A1E8582550013C8A2 /* Player.swift */; };
+		D4DF673D1E858A260013C8A2 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF673C1E858A260013C8A2 /* Builder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		D20025C81E857A73008A9E85 /* BackgroundAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAudio.swift; sourceTree = "<group>"; };
 		D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Dreamcatcher.mp3; path = chihackathon/Dreamcatcher.mp3; sourceTree = "<group>"; };
 		D4DF673A1E8582550013C8A2 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		D4DF673C1E858A260013C8A2 /* Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			children = (
 				808796681E858270005B3BF8 /* Team.swift */,
 				D4DF673A1E8582550013C8A2 /* Player.swift */,
+				D4DF673C1E858A260013C8A2 /* Builder.swift */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 			files = (
 				3CF4FF0F1E856B7E00E192CB /* GameScene.swift in Sources */,
 				3CF4FF111E856B7E00E192CB /* GameViewController.swift in Sources */,
+				D4DF673D1E858A260013C8A2 /* Builder.swift in Sources */,
 				D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */,
 				808796691E858270005B3BF8 /* Team.swift in Sources */,
 				D4DF673B1E8582550013C8A2 /* Player.swift in Sources */,
