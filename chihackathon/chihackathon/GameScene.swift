@@ -115,9 +115,9 @@ class GameScene: SKScene {
     }
 
     private func updateRunnerPositions(dt: TimeInterval) {
-        for runner in runners! {
-           runner.position.x += 5
-        }
+//        for runner in runners! {
+//           runner.position.x += 5
+//        }
     }
 
     // MARK: Input
@@ -128,23 +128,26 @@ class GameScene: SKScene {
 
     func jump(runner: Runner, force: CGFloat){
         if ableToJump == true {
+            print(force)
             run(soundJump)
             runner.physicsBody?.applyImpulse(CGVector(dx: 0, dy: force))
         }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for _ in (touches ){
-            _ = SKAction.wait(forDuration: 0.0)
-            _ = SKAction.run({
+        for touch in (touches as! Set<UITouch> ){
+            let timerAction = SKAction.wait(forDuration: 0.05)
+            let update = SKAction.run({
                 if(self.jumpForce < Constants.maxJumpForce){
-                    print(self.jumpForce)
-                    self.jumpForce += 100.0
+                    self.jumpForce += 2.0
                 }else{
                     self.jumpForce = Constants.maxJumpForce
                     self.jump(runner: self.runner1, force: Constants.maxJumpForce)
                 }
             })
+            let sequence = SKAction.sequence([timerAction, update])
+            let repeatSeq = SKAction.repeatForever(sequence)
+            self.run(repeatSeq, withKey: "holdJump")
         }
 
 //        if initialJumpY == nil {
@@ -166,8 +169,11 @@ class GameScene: SKScene {
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //runner1.physicsBody?.velocity.dy = 0.0
-        initialJumpY = nil
-        jump(runner: runner1, force: jumpForce)
+        self.removeAction(forKey: "holdJump")
+        self.jump(runner: runner1, force: self.jumpForce)
+        
+        self.jumpForce = Constants.minJumpForce
+        
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {}

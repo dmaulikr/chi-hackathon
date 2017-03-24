@@ -14,7 +14,8 @@ struct Constants {
     //Runner Constants
     static let playerSpeed: Double = 3
     static let gravity: Double = 1.0
-    static let maxJumpForce: CGFloat = 600
+    static let maxJumpForce: CGFloat = 200
+    static let minJumpForce: CGFloat = 150
     
     //CoinsRequired Constants
     static let coinsNeededForPlatform: Int = 2
