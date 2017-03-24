@@ -18,6 +18,7 @@
 		808796691E858270005B3BF8 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808796681E858270005B3BF8 /* Team.swift */; };
 		D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025C81E857A73008A9E85 /* BackgroundAudio.swift */; };
 		D20025CB1E857B41008A9E85 /* Dreamcatcher.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */; };
+		D4DF673B1E8582550013C8A2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF673A1E8582550013C8A2 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		808796681E858270005B3BF8 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		D20025C81E857A73008A9E85 /* BackgroundAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAudio.swift; sourceTree = "<group>"; };
 		D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Dreamcatcher.mp3; path = chihackathon/Dreamcatcher.mp3; sourceTree = "<group>"; };
+		D4DF673A1E8582550013C8A2 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +104,11 @@
 		D20025CD1E858202008A9E85 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				808796681E858270005B3BF8 /* Team.swift */,
+=======
+				D4DF673A1E8582550013C8A2 /* Player.swift */,
+>>>>>>> 09911300a790dd5826af24a6fbd3e05f2986364f
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -190,7 +196,11 @@
 				3CF4FF0F1E856B7E00E192CB /* GameScene.swift in Sources */,
 				3CF4FF111E856B7E00E192CB /* GameViewController.swift in Sources */,
 				D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */,
+<<<<<<< HEAD
 				808796691E858270005B3BF8 /* Team.swift in Sources */,
+=======
+				D4DF673B1E8582550013C8A2 /* Player.swift in Sources */,
+>>>>>>> 09911300a790dd5826af24a6fbd3e05f2986364f
 				3CF4FF091E856B7E00E192CB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
