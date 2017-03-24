@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C6AA8CD1E85837F00036772 /* GameCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA8CC1E85837F00036772 /* GameCenterManager.swift */; };
+		3C6AA8D01E85865E00036772 /* GameNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA8CF1E85865E00036772 /* GameNavigationController.swift */; };
 		3CE3D4731E85751700BAB456 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE3D4721E85751700BAB456 /* GameKit.framework */; };
 		3CF4FF091E856B7E00E192CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF4FF081E856B7E00E192CB /* AppDelegate.swift */; };
 		3CF4FF0B1E856B7E00E192CB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF0A1E856B7E00E192CB /* GameScene.sks */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C6AA8CC1E85837F00036772 /* GameCenterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCenterManager.swift; sourceTree = "<group>"; };
+		3C6AA8CF1E85865E00036772 /* GameNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameNavigationController.swift; sourceTree = "<group>"; };
 		3CE3D4721E85751700BAB456 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		3CF4FF051E856B7E00E192CB /* chihackathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chihackathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CF4FF081E856B7E00E192CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +50,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C6AA8CE1E85838C00036772 /* Data Managers */ = {
+			isa = PBXGroup;
+			children = (
+				3C6AA8CC1E85837F00036772 /* GameCenterManager.swift */,
+				D20025C81E857A73008A9E85 /* BackgroundAudio.swift */,
+			);
+			name = "Data Managers";
+			sourceTree = "<group>";
+		};
+		3C6AA8D11E85868A00036772 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3C6AA8CF1E85865E00036772 /* GameNavigationController.swift */,
+				3CF4FF101E856B7E00E192CB /* GameViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		3C6AA8D21E85906E00036772 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3CF4FF171E856B7E00E192CB /* LaunchScreen.storyboard */,
+				3CF4FF121E856B7E00E192CB /* Main.storyboard */,
+				3CF4FF0A1E856B7E00E192CB /* GameScene.sks */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		3C6AA8D31E85908700036772 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3CF4FF151E856B7E00E192CB /* Assets.xcassets */,
+				D20025CC1E857B61008A9E85 /* Audio Files */,
+				3CF4FF1A1E856B7E00E192CB /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		3CE3D46F1E8570E600BAB456 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -57,7 +99,6 @@
 		3CF4FEFC1E856B7E00E192CB = {
 			isa = PBXGroup;
 			children = (
-				D20025CC1E857B61008A9E85 /* Audio Files */,
 				3CF4FF071E856B7E00E192CB /* chihackathon */,
 				3CF4FF061E856B7E00E192CB /* Products */,
 				3CE3D46F1E8570E600BAB456 /* Frameworks */,
@@ -75,16 +116,12 @@
 		3CF4FF071E856B7E00E192CB /* chihackathon */ = {
 			isa = PBXGroup;
 			children = (
-				D20025CD1E858202008A9E85 /* Game Objects */,
-				D20025C81E857A73008A9E85 /* BackgroundAudio.swift */,
 				3CF4FF081E856B7E00E192CB /* AppDelegate.swift */,
-				3CF4FF0A1E856B7E00E192CB /* GameScene.sks */,
-				3CF4FF0E1E856B7E00E192CB /* GameScene.swift */,
-				3CF4FF101E856B7E00E192CB /* GameViewController.swift */,
-				3CF4FF121E856B7E00E192CB /* Main.storyboard */,
-				3CF4FF151E856B7E00E192CB /* Assets.xcassets */,
-				3CF4FF171E856B7E00E192CB /* LaunchScreen.storyboard */,
-				3CF4FF1A1E856B7E00E192CB /* Info.plist */,
+				3C6AA8CE1E85838C00036772 /* Data Managers */,
+				3C6AA8D11E85868A00036772 /* View Controllers */,
+				D20025CD1E858202008A9E85 /* Game Objects */,
+				3C6AA8D21E85906E00036772 /* Views */,
+				3C6AA8D31E85908700036772 /* Resources */,
 			);
 			path = chihackathon;
 			sourceTree = "<group>";
@@ -95,11 +132,13 @@
 				D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */,
 			);
 			name = "Audio Files";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		D20025CD1E858202008A9E85 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
+				3CF4FF0E1E856B7E00E192CB /* GameScene.swift */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -185,8 +224,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CF4FF0F1E856B7E00E192CB /* GameScene.swift in Sources */,
+				3C6AA8D01E85865E00036772 /* GameNavigationController.swift in Sources */,
 				3CF4FF111E856B7E00E192CB /* GameViewController.swift in Sources */,
 				D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */,
+				3C6AA8CD1E85837F00036772 /* GameCenterManager.swift in Sources */,
 				3CF4FF091E856B7E00E192CB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,7 +352,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = L3PXB36C98;
 				INFOPLIST_FILE = chihackathon/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sapientnitro.inhouse.chihackathon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -326,7 +367,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = L3PXB36C98;
 				INFOPLIST_FILE = chihackathon/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sapientnitro.inhouse.chihackathon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
