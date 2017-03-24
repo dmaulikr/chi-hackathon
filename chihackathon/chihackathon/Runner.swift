@@ -19,7 +19,7 @@ class Runner : Player {
     var speedBoostEnabled = false
     
     override init(texture: SKTexture!, color: SKColor, size: CGSize, name: String, number: Int) {
-        super.init(texture: <#T##SKTexture!#>, color: <#T##SKColor#>, size: <#T##CGSize#>, name: <#T##String#>, number: <#T##Int#>)
+        super.init(texture: texture, color: color, size: size, name: name, number: number)
     }
     
     required init?(coder aDecoder: NSCoder) {
