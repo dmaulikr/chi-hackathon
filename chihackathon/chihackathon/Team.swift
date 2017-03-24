@@ -33,4 +33,5 @@ class Team {
     func addCoins(coinsToAdd: Int){
         self.coins = self.coins + coinsToAdd
     }
+    
 }

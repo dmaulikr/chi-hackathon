@@ -8,13 +8,23 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 class Runner : Player {
+    
     // MARK: - Variables
     var currentSpeed: Double = Constants.playerSpeed
     var onGround : Bool = true
     var lastSafePosition : CGPoint?
     var speedBoostEnabled = false
+    
+    override init(texture: SKTexture!, color: SKColor, size: CGSize, name: String, number: Int) {
+        super.init(texture: <#T##SKTexture!#>, color: <#T##SKColor#>, size: <#T##CGSize#>, name: <#T##String#>, number: <#T##Int#>)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     var boostSpeed: Double {
         get {

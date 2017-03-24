@@ -11,10 +11,14 @@ import SpriteKit
 
 class Builder: Player {
     
-    private var team: Team
+    var team: Team
     
     func setTeam(team: Team) {
         self.team = team
+    }
+    
+    override init(texture: SKTexture!, color: SKColor, size: CGSize, name: String, number: Int) {
+        super.init(texture: <#T##SKTexture!#>, color: <#T##SKColor#>, size: <#T##CGSize#>, name: <#T##String#>, number: <#T##Int#>)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -22,35 +26,27 @@ class Builder: Player {
     }
     
     func canPlacePlatform() -> Bool {
-        return canPlaceItem(coinsRequired: Constants.coinsNeededForPlatform)
+        return team.getCoins() > Constants.coinsNeededForPlatform
     }
     
     func canPlaceSpeedBoost() -> Bool {
-        return canPlaceItem(coinsRequired: Constants.coinsNeededForSpeedBoost)
+        return team.getCoins() > Constants.coinsNeededForSpeedBoost
     }
     
     func canPlaceJumpBoost() -> Bool {
-        return canPlaceItem(coinsRequired: Constants.coinsNeededForJumpBoost)
+        return team.getCoins() > Constants.coinsNeededForJumpBoost
     }
     
     func canPlaceWall() -> Bool {
-        return canPlaceItem(coinsRequired: Constants.coinsNeededForWall)
+        return team.getCoins() > Constants.coinsNeededForWall
     }
     
     func canPlaceMissile() -> Bool {
-        return canPlaceItem(coinsRequired: Constants.coinsNeededForMissile)
+        return team.getCoins() > Constants.coinsNeededForMissile
     }
     
     func canPlaceSpeedTrap() -> Bool {
-        return canPlaceItem(coinsRequired: Constants.coinsNeededForSpeedTrap)
-    }
-    
-    func canPlaceItem(coinsRequired: Int) -> Bool {
-        if (team.getCoins() > coinsRequired) {
-            return true
-        }else{
-            return false
-        }
+        return team.getCoins() > Constants.coinsNeededForSpeedTrap
     }
     
     func completeItemPlacement(coinAmount: Int){
