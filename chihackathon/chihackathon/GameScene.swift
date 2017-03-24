@@ -29,123 +29,160 @@ struct PhysicsCategory {
 }
 
 class GameScene: SKScene {
-    
+
     let gcManager = GameCenterManager.sharedInstance
     let audioManager = AudioManager.sharedInstance
     let runnerCamera = SKCameraNode()
 
     var lastUpdateTime: TimeInterval = 0
+    var touched = false
 
-    var runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: 40, height: 40), name: "runner1", number: 1, team: Team())
-    var runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: 40, height: 40), name: "runner2", number: 2, team: Team())
+    var runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: 40, height: 40), name: "runner1", number: 1, team: Team(id: 1))
+    var runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: 40, height: 40), name: "runner2", number: 2, team: Team(id: 2))
     var runners: [Runner]?
 
     //Sounds
     let soundCoin = SKAction.playSoundFileNamed("CoinPickup.mp3", waitForCompletion: true)
     let soundJump = SKAction.playSoundFileNamed("Jump.mp3", waitForCompletion: true)
     let soundPowerup = SKAction.playSoundFileNamed("Powerup.mp3", waitForCompletion: true)
-    
+
     // MARK: Init
     override func didMove(to view: SKView) {
-        audioManager.playBackgroundMusic(filename: "Dreamcatcher")
+        //audioManager.playBackgroundMusic(filename: "Dreamcatcher")
         camera = runnerCamera
         lastUpdateTime = 0
 
-        
+
         setupRunners()
         runners?[0].walkingCharacter()
         runners?[1].walkingCharacter()
     }
-    
+
     private func onCoinPickup(runner: Runner){
         runner.pickUpCoin()
         run(soundCoin)
     }
-    
+
     private func onSpeedBoostPickup(runner: Runner){
         runner.applySpeedBoost()
         run(soundPowerup)
     }
-    
+
     private func onJumpBoostPickup(runner: Runner){
         runner.applyJumpBoost()
         run(soundPowerup)
     }
-    
+
     private func setupRunners() {
         runners = [runner1, runner2]
-        
+
         for runner in runners! {
             runner.physicsBody = SKPhysicsBody(rectangleOf: runner.size)
             runner.physicsBody?.affectedByGravity = true
             runner.physicsBody?.allowsRotation = false
-            
+
             if runner == runner1 {
                 runner.position = CGPoint(x: 100, y: 200)
             }
             else {
                 runner.position = CGPoint(x: 0, y: 200)
             }
-            
+
             let firstFrame = runner.characterWalkingFrames[0]
             runner.character = SKSpriteNode(texture: firstFrame)
             addChild(runner.character)
-            
+
             addChild(runner)
         }
 
         runner1.addChild(runnerCamera)
     }
-    
+
     // MARK: Update Loop
     override func update(_ currentTime: TimeInterval) {
         let dt = calculateDT(currentTime: currentTime)
-        
+
         updateRunnerPositions(dt: dt)
+        if runner1.physicsBody?.velocity.dy == 0 {
+            ableToJump = true
+        }else {
+            ableToJump = false
+        }
     }
-    
+
     private func calculateDT(currentTime: TimeInterval) -> TimeInterval {
         if lastUpdateTime == 0 {
             lastUpdateTime = currentTime
         }
-        
+
         let dt = currentTime - lastUpdateTime
-        
+
         lastUpdateTime = currentTime
-        
+
         return dt
     }
-    
+
     private func updateRunnerPositions(dt: TimeInterval) {
-        for runner in runners! {
-           runner.position.x += 5
-        }
+//        for runner in runners! {
+//           runner.position.x += 5
+//        }
     }
-    
+
     // MARK: Input
+
     var initialJumpY: CGFloat?
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if initialJumpY == nil {
+    var ableToJump = true
+    var jumpForce = CGFloat(200.0)
+
+    func jump(runner: Runner, force: CGFloat){
+        if ableToJump == true {
+            print(force)
             run(soundJump)
-            initialJumpY = runner1.position.y
+            runner.physicsBody?.applyImpulse(CGVector(dx: 0, dy: force))
         }
-        
-        if (runner1.position.y - initialJumpY!) < 600 {
-            runner1.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
-        }
-        else {
-            runner1.physicsBody?.velocity.dy = 0.0
-        }
-        
-        //self.onGround = false
     }
-    
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in (touches as! Set<UITouch> ){
+            let timerAction = SKAction.wait(forDuration: 0.05)
+            let update = SKAction.run({
+                if(self.jumpForce < Constants.maxJumpForce){
+                    self.jumpForce += 2.0
+                }else{
+                    self.jumpForce = Constants.maxJumpForce
+                    self.jump(runner: self.runner1, force: Constants.maxJumpForce)
+                }
+            })
+            let sequence = SKAction.sequence([timerAction, update])
+            let repeatSeq = SKAction.repeatForever(sequence)
+            self.run(repeatSeq, withKey: "holdJump")
+        }
+
+//        if initialJumpY == nil {
+//            run(soundJump)
+//            initialJumpY = runner1.position.y
+//        }
+//
+//        if (runner1.position.y - initialJumpY!) < 600 {
+//            runner1.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
+//        }
+//        else {
+//            runner1.physicsBody?.velocity.dy = 0.0
+//        }
+//
+//        //self.onGround = false
+    }
+
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {}
-    
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //runner1.physicsBody?.velocity.dy = 0.0
-        initialJumpY = nil
+        self.removeAction(forKey: "holdJump")
+        self.jump(runner: runner1, force: self.jumpForce)
+        
+        self.jumpForce = Constants.minJumpForce
+        
     }
-    
+
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {}
 }
