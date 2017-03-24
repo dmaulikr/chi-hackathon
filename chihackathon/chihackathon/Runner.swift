@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SpriteKit
 
-class Runner : Player {
+class Runner : Player, EventListenerNode, InteractiveNode {
     
     // MARK: - Variables
     var currentSpeed: Double = Constants.playerSpeed
@@ -69,7 +69,7 @@ class Runner : Player {
         //This is our general runAction method to make our character walk.
         character.run(SKAction.repeatForever(
             SKAction.animate(with: characterWalkingFrames,
-                                         timePerFrame: 0.1,
+                                         timePerFrame: 0.01,
                                          resize: false,
                                          restore: true)),
                             withKey:"walkingInPlaceCharacter")
@@ -124,6 +124,14 @@ class Runner : Player {
         currentSpeed = boostJump
     }
     
+    func didMoveToScene() {
+        isUserInteractionEnabled = true
+        parent!.physicsBody!.categoryBitMask = PhysicsCategory.Runner
+        parent!.physicsBody!.collisionBitMask = PhysicsCategory.Coin
+    }
     
+    func interact() {
+        
+    }
 }
 

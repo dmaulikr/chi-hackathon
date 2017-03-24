@@ -9,6 +9,13 @@
 import SpriteKit
 import GameplayKit
 
+protocol EventListenerNode {
+    func didMoveToScene()
+}
+protocol InteractiveNode {
+    func interact()
+}
+
 struct PhysicsCategory {
     static let None: UInt32 = 0
     static let Coin: UInt32 = 0b1 // 1
@@ -18,6 +25,7 @@ struct PhysicsCategory {
     static let Wall: UInt32 = 0b10000 // 16
     static let Missile: UInt32 = 0b100000 // 32
     static let SpeedTrap: UInt32 = 0b1000000 // 64
+    static let Runner: UInt32 = 0b10000000 // 128
 }
 
 class GameScene: SKScene {
