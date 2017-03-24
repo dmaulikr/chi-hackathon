@@ -15,8 +15,8 @@ class GameScene: SKScene {
     let audioManager = AudioManager.sharedInstance
 
     var lastUpdateTime: TimeInterval = 0
-    var runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: 40, height: 40), name: "runner1", number: 1)
-    var runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: 40, height: 40), name: "runner2", number: 2)
+    var runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: 40, height: 40), name: "runner1", number: 1, team: Team())
+    var runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: 40, height: 40), name: "runner2", number: 2, team: Team())
     var runners: [Runner]?
     
     // MARK: Init
@@ -25,6 +25,8 @@ class GameScene: SKScene {
         audioManager.playBackgroundMusic(filename: "Dreamcatcher")
         
         setupRunners()
+        runners?[0].walkingCharacter()
+        runners?[1].walkingCharacter()
     }
     
     private func setupRunners() {
@@ -40,8 +42,15 @@ class GameScene: SKScene {
                 runner.position = CGPoint(x: 100, y: 200)
             }
             
+            let firstFrame = runner.characterWalkingFrames[0]
+            runner.character = SKSpriteNode(texture: firstFrame)
+            runner.character.position = CGPoint(x:self.frame.midX, y:self.frame.midY)
+            addChild(runner.character)
+            
             addChild(runner)
         }
+
+
     }
     
     // MARK: Update Loop
