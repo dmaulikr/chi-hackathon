@@ -20,6 +20,9 @@ class GameScene: SKScene {
     var runner2 = Runner(texture: SKTexture(imageNamed: "Runner"), color: SKColor.red, size: CGSize(width: 80, height: 80), name: "runner1", number: 1, team: Team())
     var runners: [Runner]?
 
+    let soundCoin = SKAction.playSoundFileNamed("CoinPickup.mp3",
+                                                waitForCompletion: false)
+    
     // MARK: Init
     override func didMove(to view: SKView) {
         audioManager.playBackgroundMusic(filename: "Dreamcatcher")
@@ -28,6 +31,11 @@ class GameScene: SKScene {
 
         
         setupRunners()
+    }
+    
+    private func onCoinPickup(runner: Runner){
+        runner.pickUpCoin()
+        run(soundCoin)
     }
     
     private func setupRunners() {
