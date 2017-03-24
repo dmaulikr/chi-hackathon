@@ -15,6 +15,7 @@
 		3CF4FF141E856B7E00E192CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF121E856B7E00E192CB /* Main.storyboard */; };
 		3CF4FF161E856B7E00E192CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF151E856B7E00E192CB /* Assets.xcassets */; };
 		3CF4FF191E856B7E00E192CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF171E856B7E00E192CB /* LaunchScreen.storyboard */; };
+		808796691E858270005B3BF8 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808796681E858270005B3BF8 /* Team.swift */; };
 		D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025C81E857A73008A9E85 /* BackgroundAudio.swift */; };
 		D20025CB1E857B41008A9E85 /* Dreamcatcher.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		3CF4FF151E856B7E00E192CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3CF4FF181E856B7E00E192CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CF4FF1A1E856B7E00E192CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		808796681E858270005B3BF8 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		D20025C81E857A73008A9E85 /* BackgroundAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAudio.swift; sourceTree = "<group>"; };
 		D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Dreamcatcher.mp3; path = chihackathon/Dreamcatcher.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +102,7 @@
 		D20025CD1E858202008A9E85 /* Game Objects */ = {
 			isa = PBXGroup;
 			children = (
+				808796681E858270005B3BF8 /* Team.swift */,
 			);
 			name = "Game Objects";
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				3CF4FF0F1E856B7E00E192CB /* GameScene.swift in Sources */,
 				3CF4FF111E856B7E00E192CB /* GameViewController.swift in Sources */,
 				D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */,
+				808796691E858270005B3BF8 /* Team.swift in Sources */,
 				3CF4FF091E856B7E00E192CB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
