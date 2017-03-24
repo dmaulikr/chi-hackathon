@@ -16,6 +16,7 @@
 		3CF4FF161E856B7E00E192CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF151E856B7E00E192CB /* Assets.xcassets */; };
 		3CF4FF191E856B7E00E192CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF171E856B7E00E192CB /* LaunchScreen.storyboard */; };
 		D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025C81E857A73008A9E85 /* BackgroundAudio.swift */; };
+		D20025CB1E857B41008A9E85 /* Dreamcatcher.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3CF4FF181E856B7E00E192CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CF4FF1A1E856B7E00E192CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D20025C81E857A73008A9E85 /* BackgroundAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAudio.swift; sourceTree = "<group>"; };
+		D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Dreamcatcher.mp3; path = chihackathon/Dreamcatcher.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		3CF4FEFC1E856B7E00E192CB = {
 			isa = PBXGroup;
 			children = (
+				D20025CC1E857B61008A9E85 /* Audio Files */,
 				3CF4FF071E856B7E00E192CB /* chihackathon */,
 				3CF4FF061E856B7E00E192CB /* Products */,
 				3CE3D46F1E8570E600BAB456 /* Frameworks */,
@@ -83,6 +86,14 @@
 				3CF4FF1A1E856B7E00E192CB /* Info.plist */,
 			);
 			path = chihackathon;
+			sourceTree = "<group>";
+		};
+		D20025CC1E857B61008A9E85 /* Audio Files */ = {
+			isa = PBXGroup;
+			children = (
+				D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */,
+			);
+			name = "Audio Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +163,7 @@
 			files = (
 				3CF4FF141E856B7E00E192CB /* Main.storyboard in Resources */,
 				3CF4FF0B1E856B7E00E192CB /* GameScene.sks in Resources */,
+				D20025CB1E857B41008A9E85 /* Dreamcatcher.mp3 in Resources */,
 				3CF4FF161E856B7E00E192CB /* Assets.xcassets in Resources */,
 				3CF4FF191E856B7E00E192CB /* LaunchScreen.storyboard in Resources */,
 			);
