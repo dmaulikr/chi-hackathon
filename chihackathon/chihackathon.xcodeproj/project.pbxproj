@@ -33,6 +33,9 @@
 		D20025D31E85AEB2008A9E85 /* PlayerCharacter.atlas in Resources */ = {isa = PBXBuildFile; fileRef = D20025D21E85AEB2008A9E85 /* PlayerCharacter.atlas */; };
 		D4DF673B1E8582550013C8A2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF673A1E8582550013C8A2 /* Player.swift */; };
 		D4DF673D1E858A260013C8A2 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF673C1E858A260013C8A2 /* Builder.swift */; };
+		D4DF673F1E85B7450013C8A2 /* CoinPickup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF673E1E85B7450013C8A2 /* CoinPickup.mp3 */; };
+		D4DF67411E85BCEB0013C8A2 /* Jump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */; };
+		D4DF67431E85BDF30013C8A2 /* Powerup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF67421E85BDF30013C8A2 /* Powerup.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		D20025D21E85AEB2008A9E85 /* PlayerCharacter.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerCharacter.atlas; sourceTree = "<group>"; };
 		D4DF673A1E8582550013C8A2 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		D4DF673C1E858A260013C8A2 /* Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
+		D4DF673E1E85B7450013C8A2 /* CoinPickup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CoinPickup.mp3; path = chihackathon/CoinPickup.mp3; sourceTree = "<group>"; };
+		D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jump.mp3; sourceTree = "<group>"; };
+		D4DF67421E85BDF30013C8A2 /* Powerup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Powerup.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +180,9 @@
 		D20025CC1E857B61008A9E85 /* Audio Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4DF67421E85BDF30013C8A2 /* Powerup.mp3 */,
+				D4DF673E1E85B7450013C8A2 /* CoinPickup.mp3 */,
+				D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */,
 				D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */,
 			);
 			name = "Audio Files";
@@ -259,8 +268,11 @@
 			files = (
 				D20025D31E85AEB2008A9E85 /* PlayerCharacter.atlas in Resources */,
 				3CF4FF141E856B7E00E192CB /* Main.storyboard in Resources */,
+				D4DF67411E85BCEB0013C8A2 /* Jump.mp3 in Resources */,
 				3CF4FF0B1E856B7E00E192CB /* GameScene.sks in Resources */,
+				D4DF673F1E85B7450013C8A2 /* CoinPickup.mp3 in Resources */,
 				D20025CB1E857B41008A9E85 /* Dreamcatcher.mp3 in Resources */,
+				D4DF67431E85BDF30013C8A2 /* Powerup.mp3 in Resources */,
 				3CF4FF161E856B7E00E192CB /* Assets.xcassets in Resources */,
 				3CF4FF191E856B7E00E192CB /* LaunchScreen.storyboard in Resources */,
 			);
