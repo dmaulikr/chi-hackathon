@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import SpriteKit
 
 
 struct Constants {
     //Runner Constants
     static let playerSpeed: Double = 3
     static let gravity: Double = 1.0
+    static let maxJumpForce: CGFloat = 600
     
     //CoinsRequired Constants
     static let coinsNeededForPlatform: Int = 2

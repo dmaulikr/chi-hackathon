@@ -16,8 +16,9 @@ class GameScene: SKScene {
     let runnerCamera = SKCameraNode()
 
     var lastUpdateTime: TimeInterval = 0
-    var runner1 = Runner(texture: SKTexture(imageNamed: "Runner"), color: SKColor.red, size: CGSize(width: 80, height: 80), name: "runner1", number: 1, team: Team())
-    var runner2 = Runner(texture: SKTexture(imageNamed: "Runner"), color: SKColor.red, size: CGSize(width: 80, height: 80), name: "runner1", number: 1, team: Team())
+    var touched = false
+    var runner1 = Runner(texture: SKTexture(imageNamed: "Runner"), color: SKColor.red, size: CGSize(width: 80, height: 80), name: "runner1", number: 1, team: Team(id: 1))
+    var runner2 = Runner(texture: SKTexture(imageNamed: "Runner"), color: SKColor.red, size: CGSize(width: 80, height: 80), name: "runner1", number: 1, team: Team(id: 2))
     var runners: [Runner]?
 
     //Sounds
@@ -27,7 +28,7 @@ class GameScene: SKScene {
     
     // MARK: Init
     override func didMove(to view: SKView) {
-        audioManager.playBackgroundMusic(filename: "Dreamcatcher")
+        //audioManager.playBackgroundMusic(filename: "Dreamcatcher")
         camera = runnerCamera
         lastUpdateTime = 0
 
@@ -76,6 +77,11 @@ class GameScene: SKScene {
         let dt = calculateDT(currentTime: currentTime)
         
         updateRunnerPositions(dt: dt)
+        if runner1.physicsBody?.velocity.dy == 0 {
+            ableToJump = true
+        }else {
+            ableToJump = false
+        }
     }
     
     private func calculateDT(currentTime: TimeInterval) -> TimeInterval {
@@ -97,21 +103,45 @@ class GameScene: SKScene {
     }
     
     // MARK: Input
+    
     var initialJumpY: CGFloat?
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if initialJumpY == nil {
+    var ableToJump = true
+    var jumpForce = CGFloat(200.0)
+    
+    func jump(runner: Runner, force: CGFloat){
+        if ableToJump == true {
             run(soundJump)
-            initialJumpY = runner1.position.y
+            runner.physicsBody?.applyImpulse(CGVector(dx: 0, dy: force))
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for _ in (touches ){
+            _ = SKAction.wait(forDuration: 0.0)
+            _ = SKAction.run({
+                if(self.jumpForce < Constants.maxJumpForce){
+                    print(self.jumpForce)
+                    self.jumpForce += 100.0
+                }else{
+                    self.jumpForce = Constants.maxJumpForce
+                    self.jump(runner: self.runner1, force: Constants.maxJumpForce)
+                }
+            })
         }
         
-        if (runner1.position.y - initialJumpY!) < 600 {
-            runner1.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
-        }
-        else {
-            runner1.physicsBody?.velocity.dy = 0.0
-        }
-        
-        //self.onGround = false
+//        if initialJumpY == nil {
+//            run(soundJump)
+//            initialJumpY = runner1.position.y
+//        }
+//        
+//        if (runner1.position.y - initialJumpY!) < 600 {
+//            runner1.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
+//        }
+//        else {
+//            runner1.physicsBody?.velocity.dy = 0.0
+//        }
+//        
+//        //self.onGround = false
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {}
@@ -119,6 +149,7 @@ class GameScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //runner1.physicsBody?.velocity.dy = 0.0
         initialJumpY = nil
+        jump(runner: runner1, force: jumpForce)
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {}
