@@ -13,8 +13,7 @@ class Builder: Player {
     
     private var team: Team
     
-    init?(team: Team) {
-        super.init(coder: <#T##NSCoder#>)
+    func setTeam(team: Team) {
         self.team = team
     }
     
