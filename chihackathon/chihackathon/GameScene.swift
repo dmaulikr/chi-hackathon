@@ -71,7 +71,6 @@ class GameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
-        
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
