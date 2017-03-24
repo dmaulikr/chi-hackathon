@@ -7,23 +7,29 @@
 //
 
 import Foundation
-
 import AVFoundation
-var backgroundMusicPlayer: AVAudioPlayer!
-func playBackgroundMusic(filename: String) {
-    let resourceUrl = Bundle.main.url(forResource:
-        filename, withExtension: nil)
-    guard let url = resourceUrl else {
-        print("Could not find file: \(filename)")
-        return
+
+class AudioManager: NSObject {
+    
+    static let sharedInstance = AudioManager()
+    
+    private var player = AVAudioPlayer()
+    
+    func playBackgroundMusic(filename: String) {
+        if let resourcePath = Bundle.main.path(forResource: filename, ofType: "mp3") {
+            do {
+                player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: resourcePath))
+                player.numberOfLoops = -1
+                player.play()
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
     }
-    do {
-        try backgroundMusicPlayer =
-            AVAudioPlayer(contentsOf: url)
-        backgroundMusicPlayer.numberOfLoops = -1
-        backgroundMusicPlayer.prepareToPlay()
-        backgroundMusicPlayer.play()
-    } catch {
-        print("Could not create audio player!")
-        return
-    } }
+    
+    func stopMusic() {
+        player.stop()
+    }
+    
+}

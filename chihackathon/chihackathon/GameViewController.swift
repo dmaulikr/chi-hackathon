@@ -11,13 +11,40 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var authLabel: UILabel!
+    
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presentGameScene()
+        addObservers()
     }
     
+    deinit {
+        removeObservers()
+    }
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(authSuccess), name: NSNotification.Name(GameCenterManager.Authenticated), object: nil)
+    }
+    
+    private func removeObservers() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: Notification Handlers
+    func authSuccess() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.activityIndicator.alpha = 0
+            self.authLabel.alpha = 0
+        }, completion: { finished in
+            self.presentGameScene()
+        })
+    }
+    
+    // MARK: Navigation
     private func presentGameScene() {
         if let scene = SKScene(fileNamed: "GameScene") {
             scene.scaleMode = .aspectFill
@@ -31,5 +58,6 @@ class GameViewController: UIViewController {
             }
         }
     }
+    
 
 }

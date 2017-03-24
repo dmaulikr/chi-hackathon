@@ -14,6 +14,7 @@ class GameCenterManager: NSObject {
     
     static let sharedInstance = GameCenterManager()
     static let PresentAuthenticationViewController = "PresentAuthenticationViewController"
+    static let Authenticated = "Authenticated"
     
     var enabled = false
     var authVC: UIViewController?
@@ -36,6 +37,7 @@ class GameCenterManager: NSObject {
             }
             else if GKLocalPlayer.localPlayer().isAuthenticated {
                 self.enabled = true
+                NotificationCenter.default.post(name: NSNotification.Name(GameCenterManager.Authenticated), object: self)
             }
         }
     }
