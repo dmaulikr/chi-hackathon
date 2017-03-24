@@ -17,9 +17,11 @@ class Runner : Player {
     var onGround : Bool = true
     var lastSafePosition : CGPoint?
     var speedBoostEnabled = false
+    var jumpBoostEnabled = true
+    var gravity = 1.0
     
-    override init(texture: SKTexture!, color: SKColor, size: CGSize, name: String, number: Int) {
-        super.init(texture: texture, color: color, size: size, name: name, number: number)
+    override init(texture: SKTexture!, color: SKColor, size: CGSize, name: String, number: Int, team: Team) {
+        super.init(texture: texture, color: color, size: size, name: name, number: number, team: team)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,6 +39,19 @@ class Runner : Player {
         }
     }
     
+    var boostJump: Double {
+        get {
+            if jumpBoostEnabled {
+                return 0.75
+            }
+            else {
+                return Constants.gravity
+            }
+        }
+    }
+    
+    
+    
     
     // MARK: - Action methods
     func applySpeedBoost() {
@@ -47,17 +62,24 @@ class Runner : Player {
         currentSpeed = boostSpeed
         
         //timer end
-        
-        endSpeedBoost()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Constants.jumpBoostTimeout) {
+            self.endSpeedBoost()
+        }
         
     }
     
     func applyJumpBoost() {
+        jumpBoostEnabled = true
+        gravity = boostJump
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Constants.jumpBoostTimeout) {
+            self.endJumpBoost()
+        }
         
     }
     
     func pickUpCoin() {
-        
+        team.addCoins(coinsToAdd: 1)
     }
     
     func die() {
@@ -73,6 +95,11 @@ class Runner : Player {
     private func endSpeedBoost() {
         speedBoostEnabled = false
         currentSpeed = boostSpeed
+    }
+    
+    private func endJumpBoost() {
+        jumpBoostEnabled = false
+        currentSpeed = boostJump
     }
     
     

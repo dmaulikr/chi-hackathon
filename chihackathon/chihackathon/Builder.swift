@@ -11,16 +11,10 @@ import SpriteKit
 
 class Builder: Player {
 
-    var team: Team
 
-    func setTeam(team: Team) {
-        self.team = team
+    override init(texture: SKTexture!, color: SKColor, size: CGSize, name: String, number: Int, team: Team) {
+        super.init(texture: texture, color: color, size: size, name: name, number: number, team: team)
     }
-
-//    override init(texture: SKTexture!, color: SKColor, size: CGSize, name: String, number: Int) {
-//        super.init(texture: texture, color: color, size: size, name: name, number: number)
-//        self.team = Team()
-//    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
