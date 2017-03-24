@@ -29,4 +29,8 @@ class Team {
     func deductCoins(coinsToDeduct: Int) {
         self.coins = self.coins - coinsToDeduct
     }
+    
+    func addCoins(coinsToAdd: Int){
+        self.coins = self.coins + coinsToAdd
+    }
 }

@@ -13,7 +13,8 @@ class Builder: Player {
     
     private var team: Team
     
-    init(team: Team) {
+    init?(team: Team) {
+        super.init(coder: <#T##NSCoder#>)
         self.team = team
     }
     
@@ -21,37 +22,40 @@ class Builder: Player {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func placePlatform() -> Bool {
-        return placeItem(coinsRequired: Constants.coinPlaceHolder)
+    func canPlacePlatform() -> Bool {
+        return canPlaceItem(coinsRequired: Constants.coinsNeededForPlatform)
     }
     
-    func placeSpeedBoost() -> Bool {
-        return placeItem(coinsRequired: Constants.coinPlaceHolder)
+    func canPlaceSpeedBoost() -> Bool {
+        return canPlaceItem(coinsRequired: Constants.coinsNeededForSpeedBoost)
     }
     
-    func placeJumpBoost() -> Bool {
-        return placeItem(coinsRequired: Constants.coinPlaceHolder)
+    func canPlaceJumpBoost() -> Bool {
+        return canPlaceItem(coinsRequired: Constants.coinsNeededForJumpBoost)
     }
     
-    func placeWall() -> Bool {
-        return placeItem(coinsRequired: Constants.coinPlaceHolder)
+    func canPlaceWall() -> Bool {
+        return canPlaceItem(coinsRequired: Constants.coinsNeededForWall)
     }
     
-    func placeMissile() -> Bool {
-        return placeItem(coinsRequired: Constants.coinPlaceHolder)
+    func canPlaceMissile() -> Bool {
+        return canPlaceItem(coinsRequired: Constants.coinsNeededForMissile)
     }
     
-    func placeSpeedTrap() -> Bool {
-        return placeItem(coinsRequired: Constants.coinPlaceHolder)
+    func canPlaceSpeedTrap() -> Bool {
+        return canPlaceItem(coinsRequired: Constants.coinsNeededForSpeedTrap)
     }
     
-    func placeItem(coinsRequired: Int) -> Bool {
+    func canPlaceItem(coinsRequired: Int) -> Bool {
         if (team.getCoins() > coinsRequired) {
-            team.deductCoins(coinsToDeduct: coinsRequired)
             return true
         }else{
             return false
         }
+    }
+    
+    func completeItemPlacement(coinAmount: Int){
+        team.deductCoins(coinsToDeduct: coinAmount)
     }
     
 }

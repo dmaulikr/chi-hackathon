@@ -11,5 +11,14 @@ import Foundation
 
 struct Constants {
     static let playerSpeed: Double = 3
-    static let coinPlaceHolder: Int = 2
+    
+    //CoinsRequired
+    static let coinsNeededForPlatform: Int = 2
+    static let coinsNeededForSpeedBoost: Int = 2
+    static let coinsNeededForJumpBoost: Int = 2
+    static let coinsNeededForWall: Int = 2
+    static let coinsNeededForMissile: Int = 2
+    static let coinsNeededForSpeedTrap: Int = 2
+
+
 }
