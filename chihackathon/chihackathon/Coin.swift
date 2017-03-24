@@ -8,6 +8,6 @@
 
 import SpriteKit
 
-class Coin: SKSpriteNode {
+class Coin: Interactables {
 
 }

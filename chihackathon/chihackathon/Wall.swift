@@ -8,6 +8,6 @@
 
 import SpriteKit
 
-class Wall: SKSpriteNode {
+class Wall: Interactables {
 
 }

@@ -8,6 +8,6 @@
 
 import SpriteKit
 
-class SpeedBoost: SKSpriteNode {
+class SpeedBoost: Interactables {
 
 }
