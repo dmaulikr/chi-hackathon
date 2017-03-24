@@ -46,11 +46,7 @@ class Builder: Player {
     }
     
     func canPlaceItem(coinsRequired: Int) -> Bool {
-        if (team.getCoins() > coinsRequired) {
-            return true
-        }else{
-            return false
-        }
+        return team.getCoins() > coinsRequired
     }
     
     func completeItemPlacement(coinAmount: Int){
