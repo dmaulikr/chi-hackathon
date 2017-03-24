@@ -75,6 +75,7 @@
 		3CF4FF071E856B7E00E192CB /* chihackathon */ = {
 			isa = PBXGroup;
 			children = (
+				D20025CD1E858202008A9E85 /* Game Objects */,
 				D20025C81E857A73008A9E85 /* BackgroundAudio.swift */,
 				3CF4FF081E856B7E00E192CB /* AppDelegate.swift */,
 				3CF4FF0A1E856B7E00E192CB /* GameScene.sks */,
@@ -94,6 +95,13 @@
 				D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */,
 			);
 			name = "Audio Files";
+			sourceTree = "<group>";
+		};
+		D20025CD1E858202008A9E85 /* Game Objects */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Game Objects";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
