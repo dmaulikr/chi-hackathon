@@ -8,6 +8,6 @@
 
 import SpriteKit
 
-class SpeedTrap: SKSpriteNode {
+class SpeedTrap: Interactables {
 
 }

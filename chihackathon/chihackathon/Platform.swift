@@ -8,6 +8,6 @@
 
 import SpriteKit
 
-class Platform: SKSpriteNode {
+class Platform: Interactables {
 
 }

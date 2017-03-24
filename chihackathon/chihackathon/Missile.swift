@@ -8,6 +8,6 @@
 
 import SpriteKit
 
-class Missile: SKSpriteNode {
+class Missile: Interactables {
 
 }

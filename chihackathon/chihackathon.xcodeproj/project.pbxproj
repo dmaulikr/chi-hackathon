@@ -25,6 +25,7 @@
 		3CF4FF161E856B7E00E192CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF151E856B7E00E192CB /* Assets.xcassets */; };
 		3CF4FF191E856B7E00E192CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF171E856B7E00E192CB /* LaunchScreen.storyboard */; };
 		808796691E858270005B3BF8 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808796681E858270005B3BF8 /* Team.swift */; };
+		8087966B1E85A783005B3BF8 /* Interactables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8087966A1E85A783005B3BF8 /* Interactables.swift */; };
 		D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025C81E857A73008A9E85 /* BackgroundAudio.swift */; };
 		D20025CB1E857B41008A9E85 /* Dreamcatcher.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */; };
 		D20025CF1E858274008A9E85 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025CE1E858274008A9E85 /* Runner.swift */; };
@@ -54,6 +55,7 @@
 		3CF4FF181E856B7E00E192CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CF4FF1A1E856B7E00E192CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		808796681E858270005B3BF8 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		8087966A1E85A783005B3BF8 /* Interactables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactables.swift; sourceTree = "<group>"; };
 		D20025C81E857A73008A9E85 /* BackgroundAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAudio.swift; sourceTree = "<group>"; };
 		D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Dreamcatcher.mp3; path = chihackathon/Dreamcatcher.mp3; sourceTree = "<group>"; };
 		D20025CE1E858274008A9E85 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				3C4A7A221E85A22D0032C7F2 /* Wall.swift */,
 				3C4A7A2A1E85A26F0032C7F2 /* Missile.swift */,
 				3C4A7A2C1E85A2D90032C7F2 /* SpeedTrap.swift */,
+				8087966A1E85A783005B3BF8 /* Interactables.swift */,
 			);
 			name = Interactables;
 			sourceTree = "<group>";
@@ -219,7 +222,6 @@
 				TargetAttributes = {
 					3CF4FF041E856B7E00E192CB = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = HAUK6XZ7SD;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
@@ -270,6 +272,7 @@
 				3CF4FF0F1E856B7E00E192CB /* GameScene.swift in Sources */,
 				3C6AA8D01E85865E00036772 /* GameNavigationController.swift in Sources */,
 				3CF4FF111E856B7E00E192CB /* GameViewController.swift in Sources */,
+				8087966B1E85A783005B3BF8 /* Interactables.swift in Sources */,
 				D4DF673D1E858A260013C8A2 /* Builder.swift in Sources */,
 				3C4A7A231E85A22D0032C7F2 /* Wall.swift in Sources */,
 				D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */,
@@ -406,7 +409,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = HAUK6XZ7SD;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = chihackathon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -421,7 +424,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = HAUK6XZ7SD;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = chihackathon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

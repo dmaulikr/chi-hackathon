@@ -8,6 +8,6 @@
 
 import SpriteKit
 
-class JumpBoost: SKSpriteNode {
+class JumpBoost: Interactables {
 
 }
