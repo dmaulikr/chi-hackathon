@@ -16,6 +16,8 @@
 		3C4A7A2D1E85A2D90032C7F2 /* SpeedTrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A7A2C1E85A2D90032C7F2 /* SpeedTrap.swift */; };
 		3C6AA8CD1E85837F00036772 /* GameCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA8CC1E85837F00036772 /* GameCenterManager.swift */; };
 		3C6AA8D01E85865E00036772 /* GameNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA8CF1E85865E00036772 /* GameNavigationController.swift */; };
+		3CCBB23B1E863FEC00E69F89 /* RedFireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBB23A1E863FEC00E69F89 /* RedFireParticle.sks */; };
+		3CCBB23E1E865CCF00E69F89 /* BlueFireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBB23D1E865CCF00E69F89 /* BlueFireParticle.sks */; };
 		3CE3D4731E85751700BAB456 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE3D4721E85751700BAB456 /* GameKit.framework */; };
 		3CF4FF091E856B7E00E192CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF4FF081E856B7E00E192CB /* AppDelegate.swift */; };
 		3CF4FF0B1E856B7E00E192CB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF0A1E856B7E00E192CB /* GameScene.sks */; };
@@ -47,6 +49,8 @@
 		3C4A7A2C1E85A2D90032C7F2 /* SpeedTrap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedTrap.swift; sourceTree = "<group>"; };
 		3C6AA8CC1E85837F00036772 /* GameCenterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCenterManager.swift; sourceTree = "<group>"; };
 		3C6AA8CF1E85865E00036772 /* GameNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameNavigationController.swift; sourceTree = "<group>"; };
+		3CCBB23A1E863FEC00E69F89 /* RedFireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RedFireParticle.sks; sourceTree = "<group>"; };
+		3CCBB23D1E865CCF00E69F89 /* BlueFireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlueFireParticle.sks; sourceTree = "<group>"; };
 		3CE3D4721E85751700BAB456 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		3CF4FF051E856B7E00E192CB /* chihackathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chihackathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CF4FF081E856B7E00E192CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,10 +134,20 @@
 			children = (
 				D20025D21E85AEB2008A9E85 /* PlayerCharacter.atlas */,
 				3CF4FF151E856B7E00E192CB /* Assets.xcassets */,
+				3CCBB23C1E8642EA00E69F89 /* Particles */,
 				D20025CC1E857B61008A9E85 /* Audio Files */,
 				3CF4FF1A1E856B7E00E192CB /* Info.plist */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		3CCBB23C1E8642EA00E69F89 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				3CCBB23A1E863FEC00E69F89 /* RedFireParticle.sks */,
+				3CCBB23D1E865CCF00E69F89 /* BlueFireParticle.sks */,
+			);
+			name = Particles;
 			sourceTree = "<group>";
 		};
 		3CE3D46F1E8570E600BAB456 /* Frameworks */ = {
@@ -264,6 +278,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D20025D31E85AEB2008A9E85 /* PlayerCharacter.atlas in Resources */,
+				3CCBB23B1E863FEC00E69F89 /* RedFireParticle.sks in Resources */,
+				3CCBB23E1E865CCF00E69F89 /* BlueFireParticle.sks in Resources */,
 				3CF4FF141E856B7E00E192CB /* Main.storyboard in Resources */,
 				D4DF67411E85BCEB0013C8A2 /* Jump.mp3 in Resources */,
 				3CF4FF0B1E856B7E00E192CB /* GameScene.sks in Resources */,

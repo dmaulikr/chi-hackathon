@@ -12,7 +12,7 @@ import SpriteKit
 struct Constants {
     
     // Runner Constants
-    static let playerSpeed: CGFloat = 3
+    static let playerSpeed: CGFloat = 200
     static let gravity: CGFloat = 1.0
     static let maxJumpForce: CGFloat = 250
     static let minJumpForce: CGFloat = 150
@@ -28,8 +28,8 @@ struct Constants {
     static let coinsNeededForSpeedTrap: Int = 2
     
     // Timeouts
-    static let speedBoostTimeout: TimeInterval = 1.0
-    static let jumpBoostTimeout: TimeInterval = 1.0
-    static let deadTimeout: TimeInterval = 15.0
+    static let speedBoostTimeout: TimeInterval = 2.0
+    static let jumpBoostTimeout: TimeInterval = 2.0
+    static let deadTimeout: TimeInterval = 1.0
 
 }
