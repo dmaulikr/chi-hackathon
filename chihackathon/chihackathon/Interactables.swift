@@ -14,6 +14,6 @@ class Interactables: SKSpriteNode, EventListenerNode {
     }
     
     func interact() {
-        isUserInteractionEnabled = false
+        isUserInteractionEnabled = true
     }
 }

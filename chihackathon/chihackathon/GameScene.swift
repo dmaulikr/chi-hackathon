@@ -26,9 +26,10 @@ struct PhysicsCategory {
     static let Missile: UInt32 = 0b100000 // 32
     static let SpeedTrap: UInt32 = 0b1000000 // 64
     static let Runner: UInt32 = 0b10000000 // 128
+    static let Edge: UInt32 = 0b100000000 // 256
 }
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
 
     let gcManager = GameCenterManager.sharedInstance
     let audioManager = AudioManager.sharedInstance
@@ -48,6 +49,9 @@ class GameScene: SKScene {
 
     // MARK: Init
     override func didMove(to view: SKView) {
+        
+        setUpPhysics()
+        view.showsPhysics = true
         //audioManager.playBackgroundMusic(filename: "Dreamcatcher")
         camera = runnerCamera
         lastUpdateTime = 0
@@ -55,7 +59,30 @@ class GameScene: SKScene {
 
         setupRunners()
         runners?[0].walkingCharacter()
-        runners?[1].walkingCharacter()
+//        runners?[1].walkingCharacter()
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        
+        print("COLLISION")
+        print(contact.bodyA)
+        print(contact.bodyB)
+        
+        if collision == PhysicsCategory.Coin | PhysicsCategory.Runner {
+            
+            let labelNode = contact.bodyA.categoryBitMask == PhysicsCategory.Coin ?
+                contact.bodyA.node :
+                contact.bodyB.node
+            
+            if let message = labelNode as? Coin {
+                message.interact()
+            }
+        }
+        
+        if collision == PhysicsCategory.Coin {
+            print("SUCCESS")
+        }
     }
 
     private func onCoinPickup(runner: Runner){
@@ -82,13 +109,16 @@ class GameScene: SKScene {
             runner.physicsBody?.allowsRotation = false
 
             if runner == runner1 {
-                runner.position = CGPoint(x: 100, y: 200)
+                runner.name = "player1"
+                runner.position = CGPoint(x: -300, y: 200)
             }
             else {
-                runner.position = CGPoint(x: 0, y: 200)
+                runner.name = "player2"
+                runner.position = CGPoint(x: -100, y: 200)
             }
             
             addChild(runner)
+            break
         }
 
         runner1.addChild(runnerCamera)
@@ -99,12 +129,14 @@ class GameScene: SKScene {
         let dt = calculateDT(currentTime: currentTime)
 
         updateRunnerPositions(dt: dt)
-        print("\(runner1.physicsBody?.velocity.dy)")
+//        print("\(runner1.physicsBody?.velocity.dy)")
         if runner1.physicsBody?.velocity.dy == 0 {
             ableToJump = true
         }else {
             ableToJump = false
         }
+        
+        setUpPhysics()
         
 //        for runner in runners! {
 //            if runner.position.y < 0 {
@@ -180,4 +212,31 @@ class GameScene: SKScene {
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {}
+    
+    func setUpPhysics() {
+//        let maxAspectRatio: CGFloat = 16.0/9.0
+//        let maxAspectRatioHeight = size.width / maxAspectRatio
+//        let playableMargin: CGFloat = (size.height - maxAspectRatioHeight)/2
+        let playableRect = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: frame.size.height)
+        
+//        let height = (self.view! as SKView).bounds.height
+//        let width = (self.view! as SKView).bounds.width
+        
+        
+//        let playableRect = CGRect(x: 0, y: 0, width: width, height: height)
+        
+        
+        print("Playable Rect")
+        print(playableRect)
+        physicsBody = SKPhysicsBody(edgeLoopFrom: playableRect)
+
+        physicsWorld.contactDelegate = self
+        physicsBody!.categoryBitMask = PhysicsCategory.Edge
+
+        enumerateChildNodes(withName: "//*", using: { node, _ in
+            if let eventListenerNode = node as? EventListenerNode {
+                eventListenerNode.didMoveToScene()
+            }
+        })
+    }
 }
