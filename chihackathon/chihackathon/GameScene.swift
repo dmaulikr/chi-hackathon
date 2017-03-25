@@ -81,21 +81,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
-//        print("COLLISION")
-//        print(collision)
-//        print(PhysicsCategory.Coin | PhysicsCategory.Runner)
-//        print(contact.bodyA.node?.name)
-//        
-//        print(contact.bodyB.node?.name)
+        if collision == PhysicsCategory.Finish | PhysicsCategory.Runner {
+            let winAction = SKAction.run(){
+                let reveal = SKTransition.flipVertical(withDuration: 0.5)
+                let gameOverScene = GameOverScene(size: self.size, won: true)
+                self.view?.presentScene(gameOverScene, transition: reveal)
+            }
+            run(winAction)
+        }
         
         if collision == PhysicsCategory.Coin | PhysicsCategory.Runner {
             
-            let labelNode = contact.bodyA.categoryBitMask == PhysicsCategory.Coin ?
+            let coinNode = contact.bodyA.categoryBitMask == PhysicsCategory.Coin ?
                 contact.bodyA.node :
                 contact.bodyB.node
             
-            if let message = labelNode as? Coin {
-                message.interact()
+            if let contactCoin = coinNode as? Coin {
+                contactCoin.interact()
             }
         }
         

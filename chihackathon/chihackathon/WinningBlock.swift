@@ -1,21 +1,21 @@
 //
-//  Coin.swift
+//  WinningBlock.swift
 //  chihackathon
 //
-//  Created by Derrick Hunt on 3/24/17.
+//  Created by Shitiz Gupta on 3/25/17.
 //  Copyright © 2017 Sapient. All rights reserved.
 //
 
 import SpriteKit
 
-class Coin: Interactables {
+class WinningBlock: Interactables {
     
     override func didMoveToScene() {
         super.didMoveToScene()
         isUserInteractionEnabled = true
         physicsBody = SKPhysicsBody(circleOfRadius: size.height/2)
         physicsBody?.affectedByGravity = false
-        physicsBody?.categoryBitMask = PhysicsCategory.Coin
+        physicsBody?.categoryBitMask = PhysicsCategory.Finish
         physicsBody?.contactTestBitMask = PhysicsCategory.Runner
         physicsBody?.collisionBitMask = PhysicsCategory.Runner
     }
@@ -23,9 +23,8 @@ class Coin: Interactables {
     override func interact() {
         super.interact()
         print("INTERACTED")
-        run(SKAction.sequence([
-            SKAction.removeFromParent()
-            ]))
     }
-
+    
 }
+
+

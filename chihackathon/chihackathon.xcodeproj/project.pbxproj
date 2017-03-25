@@ -38,6 +38,7 @@
 		D4DF67451E860E950013C8A2 /* Falling.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF67441E860E950013C8A2 /* Falling.mp3 */; };
 		D4DF674C1E8648EA0013C8A2 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D4DF674B1E8648EA0013C8A2 /* GameOverScene.sks */; };
 		D4DF674E1E864B1B0013C8A2 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF674D1E864B1B0013C8A2 /* GameOverScene.swift */; };
+		D4DF67501E8661EB0013C8A2 /* WinningBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF674F1E8661EB0013C8A2 /* WinningBlock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		D4DF67441E860E950013C8A2 /* Falling.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Falling.mp3; path = chihackathon/Falling.mp3; sourceTree = "<group>"; };
 		D4DF674B1E8648EA0013C8A2 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		D4DF674D1E864B1B0013C8A2 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		D4DF674F1E8661EB0013C8A2 /* WinningBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinningBlock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				3C4A7A2A1E85A26F0032C7F2 /* Missile.swift */,
 				3C4A7A2C1E85A2D90032C7F2 /* SpeedTrap.swift */,
 				8087966A1E85A783005B3BF8 /* Interactables.swift */,
+				D4DF674F1E8661EB0013C8A2 /* WinningBlock.swift */,
 			);
 			name = Interactables;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				3C4A7A2B1E85A26F0032C7F2 /* Missile.swift in Sources */,
 				3CF4FF091E856B7E00E192CB /* AppDelegate.swift in Sources */,
 				3C4A7A291E85A2570032C7F2 /* Platform.swift in Sources */,
+				D4DF67501E8661EB0013C8A2 /* WinningBlock.swift in Sources */,
 				D20025D11E858461008A9E85 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
