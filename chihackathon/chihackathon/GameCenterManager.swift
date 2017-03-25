@@ -207,8 +207,10 @@ extension GameCenterManager: GKMatchDelegate {
                 playersRandomNumbers[playerID] = dictionary[playerID]
                 
                 // TODO - fix nil crash
-                if playersRandomNumbers.count == players!.count + 1 {
-                    assignPlayers()
+                if players != nil {
+                    if playersRandomNumbers.count == players!.count + 1 {
+                        assignPlayers()
+                    }
                 }
             }
         }
@@ -216,7 +218,7 @@ extension GameCenterManager: GKMatchDelegate {
             checkForJumpMessage(message: message)
             checkForJumpBoostMessage(message: message)
             checkForSpeedBoostMessage(message: message)
-            checkForRespawnMessage(message: message)
+            //checkForRespawnMessage(message: message)
         }
     }
     

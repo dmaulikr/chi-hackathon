@@ -56,6 +56,7 @@ class Runner: SKSpriteNode {
     let soundJump = SKAction.playSoundFileNamed("Jump.mp3", waitForCompletion: true)
     let soundCoin = SKAction.playSoundFileNamed("CoinPickup.mp3", waitForCompletion: true)
     let soundPowerup = SKAction.playSoundFileNamed("Powerup.mp3", waitForCompletion: true)
+    let soundFall = SKAction.playSoundFileNamed("Falling.mp3", waitForCompletion: true)
     
     init(team: Team, playerName: String) {
         super.init(texture: nil, color: SKColor.white, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight))
@@ -75,11 +76,13 @@ class Runner: SKSpriteNode {
     
     private func setPhysics() {
         physicsBody = SKPhysicsBody(rectangleOf: size)
+        physicsBody?.isDynamic = true
         physicsBody?.affectedByGravity = true
         physicsBody?.allowsRotation = false
-        
-        //parent!.physicsBody!.categoryBitMask = PhysicsCategory.Runner
-        //parent!.physicsBody!.collisionBitMask = PhysicsCategory.Coin
+        physicsBody?.usesPreciseCollisionDetection = true
+        physicsBody?.categoryBitMask = PhysicsCategory.Runner
+        physicsBody?.contactTestBitMask = PhysicsCategory.Ground | PhysicsCategory.Coin
+        physicsBody?.collisionBitMask = PhysicsCategory.Ground
     }
     
     private func setTextures() {
@@ -131,7 +134,7 @@ class Runner: SKSpriteNode {
     
     // MARK: Game Actions
     func jump(force: CGFloat) {
-        //if onGround {
+        if onGround {
             var jumpForce = force
             if jumpBoostEnabled {
                 jumpForce *= jumpMultiplier
@@ -143,7 +146,7 @@ class Runner: SKSpriteNode {
             onGround = false
         
             run(soundJump)
-        //}
+        }
     }
     
     func pickUpCoin() {
@@ -154,6 +157,7 @@ class Runner: SKSpriteNode {
         sendRespawnData(position: lastSafePosition)
 
         deaths += 1
+        run(soundFall)
         
         physicsBody?.velocity.dx = 0
         physicsBody?.velocity.dy = 0

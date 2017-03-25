@@ -10,23 +10,12 @@ import SpriteKit
 import GameplayKit
 import GameKit
 
-protocol EventListenerNode {
-    func didMoveToScene()
-}
-protocol InteractiveNode {
-    func interact()
-}
-
 struct PhysicsCategory {
-    static let None: UInt32 = 0
-    static let Coin: UInt32 = 0b1 // 1
-    static let Platform: UInt32 = 0b10 // 2
-    static let JumpBoost: UInt32 = 0b100 // 4
-    static let SpeedBoost: UInt32 = 0b1000 // 8
-    static let Wall: UInt32 = 0b10000 // 16
-    static let Missile: UInt32 = 0b100000 // 32
-    static let SpeedTrap: UInt32 = 0b1000000 // 64
-    static let Runner: UInt32 = 0b10000000 // 128
+    static let None: UInt32 =   0x1 << 0
+    static let Runner: UInt32 = 0x1 << 1
+    static let Ground: UInt32 = 0x1 << 2
+    static let Coin: UInt32 =   0x1 << 3
+    static let Finish: UInt32 = 0x1 << 4
 }
 
 class GameScene: SKScene {
@@ -37,7 +26,7 @@ class GameScene: SKScene {
 
     var lastUpdateTime: TimeInterval = 0
     var touched = false
-    
+
     var team1 = Team(id: 1, color: SKColor.red)
     var team2 = Team(id: 2, color: SKColor.blue)
     var team3 = Team(id: 3, color: SKColor.yellow)
@@ -50,17 +39,46 @@ class GameScene: SKScene {
     var runners = [Runner]()
     var playerRunner: Runner!
 
+
     // MARK: Init
     override func didMove(to view: SKView) {
         gcManager.gameScene = self
+        
         //audioManager.playBackgroundMusic(filename: "Dreamcatcher")
-
-        physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
+        
         camera = runnerCamera
+        
         lastUpdateTime = 0
 
+        setupPhysics()
         setupRunners()
+        setWinningBlock()
+        
         assignPlayer()
+
+    }
+    
+    func setupPhysics() {
+        physicsWorld.contactDelegate = self
+        physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
+        
+        enumerateChildNodes(withName: "Coin", using: { node, _ in
+            if let coin = node as? Coin {
+                coin.setupPhysics()
+            }
+        })
+        
+        enumerateChildNodes(withName: "Ground", using: { node, _ in
+            if let sprite = node as? SKSpriteNode {
+                sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
+                sprite.physicsBody?.isDynamic = false
+                sprite.physicsBody?.affectedByGravity = false
+                sprite.physicsBody?.usesPreciseCollisionDetection = true
+                sprite.physicsBody?.categoryBitMask = PhysicsCategory.Ground
+                sprite.physicsBody?.contactTestBitMask = PhysicsCategory.Runner
+                sprite.physicsBody?.collisionBitMask = PhysicsCategory.Runner
+            }
+        })
     }
 
     private func setupRunners() {
@@ -74,10 +92,10 @@ class GameScene: SKScene {
 
         for runner in runners {
             if runner == runner1 {
-                runner.position = CGPoint(x: -100, y: 200)
+                runner.position = CGPoint(x: -100, y: 300)
             }
             else if runner == runner2 {
-                runner.position = CGPoint(x: -200, y: 200)
+                runner.position = CGPoint(x: -200, y: 300)
             }
             else if runner == runner3 {
                 runner.position = CGPoint(x: -300, y: 200)
@@ -92,6 +110,14 @@ class GameScene: SKScene {
         }
     }
     
+    private func setWinningBlock() {
+        childNode(withName: "WinningBlock")?.physicsBody = SKPhysicsBody(rectangleOf: (childNode(withName: "WinningBlock")!.frame.size))
+        childNode(withName: "WinningBlock")?.physicsBody?.usesPreciseCollisionDetection = true
+        childNode(withName: "WinningBlock")?.physicsBody?.categoryBitMask = PhysicsCategory.Finish
+        childNode(withName: "WinningBlock")?.physicsBody?.collisionBitMask = PhysicsCategory.Finish | PhysicsCategory.Runner
+        childNode(withName: "WinningBlock")?.physicsBody?.contactTestBitMask = PhysicsCategory.Finish | PhysicsCategory.Runner
+    }
+
     private func assignPlayer() {
         var index = 0
         for player in gcManager.playerAssignments {
@@ -151,7 +177,7 @@ class GameScene: SKScene {
             playerRunner.position = playerRunner.lastSafePosition
         }
     }
-    
+
     private func updateRunnerPositions(dt: TimeInterval) {
         for runner in runners {
             let dx = Constants.playerSpeed * runner.speedMultiplier * CGFloat(dt)
@@ -193,5 +219,61 @@ class GameScene: SKScene {
     func applyJumpBoost() {
         playerRunner.applyJumpBoost()
     }
+}
 
+extension GameScene: SKPhysicsContactDelegate {
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        var firstBody: SKPhysicsBody!
+        var secondBody: SKPhysicsBody!
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        }
+        else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        if ((firstBody.categoryBitMask & PhysicsCategory.Runner != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.Ground != 0)) {
+            if (contact.bodyA.node?.parent == nil || contact.bodyB.node?.parent == nil) {
+                return
+            }
+            
+            if let runnerNode = firstBody.node as? Runner {
+                if let groundNode = secondBody.node as? SKSpriteNode {
+                    runnerNode.onGround = true
+                    
+//                    runnerNode.physicsBody?.velocity.dy = 0
+//                    runnerNode.position = CGPoint(x: runnerNode.position.x, y: groundNode.position.y + 10 + groundNode.size.height / 2)
+//                    
+//                    print(runnerNode.position.x)
+//                    print(groundNode.position.y)
+//                    print(groundNode.size.height / 2)
+                    
+                    runnerNode.lastSafePosition = runnerNode.position
+                }
+            }
+        }
+        
+        if ((firstBody.categoryBitMask & PhysicsCategory.Runner != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.Coin != 0)) {
+            if (contact.bodyA.node?.parent == nil || contact.bodyB.node?.parent == nil) {
+                return
+            }
+            
+            // Remove coin from scene and add to player's coins
+            if let coin = secondBody.node as? Coin {
+                coin.removeFromParent()
+                
+                if firstBody.node == playerRunner {
+                    playerRunner.team.coins += 1
+                }
+            }
+            
+        }
+    }
+        
 }

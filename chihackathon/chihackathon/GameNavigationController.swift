@@ -18,6 +18,7 @@ class GameNavigationController: UINavigationController {
         
         addObservers()
         gcManager.authenticateLocalPlayer()
+        
     }
     
     deinit {
