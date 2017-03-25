@@ -90,7 +90,7 @@ class GameScene: SKScene {
             runner.physicsBody?.allowsRotation = false
 
             if runner == runner1 {
-                runner.position = CGPoint(x: 100, y: 200)
+                runner.position = CGPoint(x: 0, y: 200)
             }
             else {
                 runner.position = CGPoint(x: 0, y: 200)
@@ -127,7 +127,8 @@ class GameScene: SKScene {
 
         updateRunnerPositions(dt: dt)
         print("\(runner1.physicsBody?.velocity.dy)")
-        if runner1.physicsBody?.velocity.dy == 0 {
+        
+        if player!.physicsBody?.velocity.dy == 0 {
             ableToJump = true
         }else {
             ableToJump = false
@@ -166,20 +167,22 @@ class GameScene: SKScene {
 
     func jump(runner: Runner, force: CGFloat){
         if ableToJump == true {
-            sendJump()
             print(force)
+            
+            sendJump(force: force)
+            
             run(soundJump)
             runner.physicsBody?.applyImpulse(CGVector(dx: 0, dy: force))
         }
     }
     
-    private func sendJump() {
+    private func sendJump(force: CGFloat) {
         var message = ""
         if player == runner1 {
-            message = "runner1DidJump"
+            message = "runner1DidJump:\(force)"
         }
         else if player == runner2 {
-            message = "runner2DidJump"
+            message = "runner2DidJump:\(force)"
         }
         
         let data = NSKeyedArchiver.archivedData(withRootObject: message)
@@ -199,7 +202,7 @@ class GameScene: SKScene {
                     self.jumpForce += 15.0
                 }else{
                     self.jumpForce = Constants.maxJumpForce
-                    self.jump(runner: self.runner1, force: Constants.maxJumpForce)
+                    self.jump(runner: self.player!, force: Constants.maxJumpForce)
                 }
             })
             let sequence = SKAction.sequence([timerAction, update])
@@ -212,7 +215,7 @@ class GameScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.removeAction(forKey: "holdJump")
-        self.jump(runner: runner1, force: self.jumpForce)
+        self.jump(runner: player!, force: self.jumpForce)
         
         self.jumpForce = Constants.minJumpForce
         

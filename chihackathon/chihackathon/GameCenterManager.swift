@@ -231,11 +231,15 @@ extension GameCenterManager: GKMatchDelegate {
             }
         }
         else if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? String {
-            if message == "runner1DidJump" {
-                gameScene?.runner1.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 300))
+            if (message.range(of: "runner1DidJump") != nil) {
+                if let force = Double(message.components(separatedBy: ":").last!) {
+                    gameScene?.runner1.physicsBody?.applyImpulse(CGVector(dx: 0, dy: CGFloat(force)))
+                }
             }
-            else if message == "runner2DidJump" {
-                gameScene?.runner2.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 300))
+            else if (message.range(of: "runner2DidJump") != nil) {
+                if let force = Double(message.components(separatedBy: ":").last!) {
+                    gameScene?.runner2.physicsBody?.applyImpulse(CGVector(dx: 0, dy: CGFloat(force)))
+                }
             }
         }
         
