@@ -242,8 +242,6 @@ extension GameCenterManager: GKMatchDelegate {
                 }
             }
         }
-        
-        // TODO - do stuff with the data!
     }
     
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {

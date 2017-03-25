@@ -31,7 +31,6 @@
 		D20025CF1E858274008A9E85 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025CE1E858274008A9E85 /* Runner.swift */; };
 		D20025D11E858461008A9E85 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025D01E858461008A9E85 /* Constants.swift */; };
 		D20025D31E85AEB2008A9E85 /* PlayerCharacter.atlas in Resources */ = {isa = PBXBuildFile; fileRef = D20025D21E85AEB2008A9E85 /* PlayerCharacter.atlas */; };
-		D4DF673B1E8582550013C8A2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF673A1E8582550013C8A2 /* Player.swift */; };
 		D4DF673D1E858A260013C8A2 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF673C1E858A260013C8A2 /* Builder.swift */; };
 		D4DF673F1E85B7450013C8A2 /* CoinPickup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF673E1E85B7450013C8A2 /* CoinPickup.mp3 */; };
 		D4DF67411E85BCEB0013C8A2 /* Jump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */; };
@@ -66,7 +65,6 @@
 		D20025CE1E858274008A9E85 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
 		D20025D01E858461008A9E85 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D20025D21E85AEB2008A9E85 /* PlayerCharacter.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerCharacter.atlas; sourceTree = "<group>"; };
-		D4DF673A1E8582550013C8A2 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		D4DF673C1E858A260013C8A2 /* Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
 		D4DF673E1E85B7450013C8A2 /* CoinPickup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CoinPickup.mp3; path = chihackathon/CoinPickup.mp3; sourceTree = "<group>"; };
 		D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jump.mp3; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 			children = (
 				3CF4FF0E1E856B7E00E192CB /* GameScene.swift */,
 				808796681E858270005B3BF8 /* Team.swift */,
-				D4DF673A1E8582550013C8A2 /* Player.swift */,
 				D20025CE1E858274008A9E85 /* Runner.swift */,
 				D4DF673C1E858A260013C8A2 /* Builder.swift */,
 				3C4A7A2E1E85A2F50032C7F2 /* Interactables */,
@@ -303,7 +300,6 @@
 				D20025CF1E858274008A9E85 /* Runner.swift in Sources */,
 				3C4A7A271E85A2490032C7F2 /* JumpBoost.swift in Sources */,
 				808796691E858270005B3BF8 /* Team.swift in Sources */,
-				D4DF673B1E8582550013C8A2 /* Player.swift in Sources */,
 				3C4A7A2B1E85A26F0032C7F2 /* Missile.swift in Sources */,
 				3CF4FF091E856B7E00E192CB /* AppDelegate.swift in Sources */,
 				3C4A7A291E85A2570032C7F2 /* Platform.swift in Sources */,

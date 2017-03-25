@@ -38,12 +38,18 @@ class GameScene: SKScene {
     var lastUpdateTime: TimeInterval = 0
     var touched = false
 
-    var runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), name: "runner1", number: 1, team: Team(id: 1))
-    var runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), name: "runner2", number: 2, team: Team(id: 2))
-    var runners: [Runner]?
-    
-    var player: Runner?
+    var team1 = Team(id: 1, color: SKColor.red)
+    var team2 = Team(id: 2, color: SKColor.blue)
 
+    var runner1: Runner!
+    var runner2: Runner!
+    var runners = [Runner]()
+    var playerRunner: Runner?
+
+    var builder1: Builder!
+    var builder2: Builder!
+    var builders = [Builder]()
+    var playerBuilder: Builder?
 
     //Sounds
     let soundCoin = SKAction.playSoundFileNamed("CoinPickup.mp3", waitForCompletion: true)
@@ -56,7 +62,7 @@ class GameScene: SKScene {
         gcManager.gameScene = self
 
         //audioManager.playBackgroundMusic(filename: "Dreamcatcher")
-        
+
 //        let cam1 = SKSpriteNode(imageNamed: "runnerCam")
 //        cam1.position = CGPoint(x: self.frame.midX, y: (self.frame.maxY - 50))
 //        cam1.setScale(0.1)
@@ -65,50 +71,34 @@ class GameScene: SKScene {
         physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         camera = runnerCamera
         lastUpdateTime = 0
-        
+
         setupRunners()
         setupBuilders()
-        
-        
-        runners?[0].walkingCharacter()
-        runners?[1].walkingCharacter()
 
         assignPlayer()
     }
 
-    private func onCoinPickup(runner: Runner){
-        runner.pickUpCoin()
-        run(soundCoin)
-    }
-
-    private func onSpeedBoostPickup(runner: Runner){
-        runner.applySpeedBoost()
-        run(soundPowerup)
-    }
-
-    private func onJumpBoostPickup(runner: Runner){
-        runner.applyJumpBoost()
-        run(soundPowerup)
-    }
-
     private func setupRunners() {
+        runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), team: team1, name: "P1")
+        runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), team: team2, name: "P2")
+
         runners = [runner1, runner2]
 
-        for runner in runners! {
-            runner.physicsBody = SKPhysicsBody(rectangleOf: runner.size)
-            runner.physicsBody?.affectedByGravity = true
-            runner.physicsBody?.allowsRotation = false
-
+        for runner in runners {
             if runner == runner1 {
-                runner.position = CGPoint(x: 0, y: 200)
+                runner.position = CGPoint(x: -100, y: 200)
             }
-            else {
-                runner.position = CGPoint(x: 0, y: 200)
-                runner.addChild(SKShapeNode(circleOfRadius: 50))
+            else if runner == runner2 {
+                runner.position = CGPoint(x: -200, y: 200)
             }
 
+            runner.walkingCharacter()
             addChild(runner)
         }
+    }
+
+    private func setupBuilders() {
+
     }
 
     private func assignPlayer() {
@@ -122,13 +112,19 @@ class GameScene: SKScene {
         }
 
         if index == 0 {
-            player = runner1
+            playerRunner = runner1
         }
         else if index == 1 {
-            player = runner2
+            playerRunner = runner2
+        }
+        else if index == 2 {
+            playerBuilder = builder1
+        }
+        else if index == 3 {
+            playerBuilder = builder2
         }
 
-        player?.addChild(runnerCamera)
+        playerRunner?.addChild(runnerCamera)
     }
 
     // MARK: Update Loop
@@ -137,14 +133,17 @@ class GameScene: SKScene {
 
         updateRunnerPositions(dt: dt)
 
-        if player!.physicsBody?.velocity.dy == 0 {
-            ableToJump = true
-            player!.lastSecureYPos = player!.position.y
-        }else {
-            ableToJump = false
+        if playerRunner != nil {
+            if playerRunner!.physicsBody?.velocity.dy == 0 {
+                ableToJump = true
+                playerRunner!.lastSecureYPos = playerRunner!.position.y
+            }
+            else {
+                ableToJump = false
+            }
         }
 
-        for runner in runners! {
+        for runner in runners {
             if runner.position == childNode(withName: "Coin")!.position {
                 childNode(withName: "Coin")?.removeFromParent()
                 onCoinPickup(runner: runner)
@@ -169,9 +168,24 @@ class GameScene: SKScene {
 
 
     private func updateRunnerPositions(dt: TimeInterval) {
-        for runner in runners! {
-           runner.position.x += 5
+        for runner in runners {
+            runner.position.x += Constants.playerSpeed * runner.jumpMultiplier
         }
+    }
+
+    private func onCoinPickup(runner: Runner){
+        runner.pickUpCoin()
+        run(soundCoin)
+    }
+
+    private func onSpeedBoostPickup(runner: Runner){
+        runner.applySpeedBoost()
+        run(soundPowerup)
+    }
+
+    private func onJumpBoostPickup(runner: Runner){
+        runner.applyJumpBoost()
+        run(soundPowerup)
     }
 
     // MARK: Input
@@ -192,10 +206,10 @@ class GameScene: SKScene {
 
     private func sendJump(force: CGFloat) {
         var message = ""
-        if player == runner1 {
+        if playerRunner == runner1 {
             message = "runner1DidJump:\(force)"
         }
-        else if player == runner2 {
+        else if playerRunner == runner2 {
             message = "runner2DidJump:\(force)"
         }
 
@@ -214,9 +228,10 @@ class GameScene: SKScene {
             let update = SKAction.run({
                 if(self.jumpForce < Constants.maxJumpForce){
                     self.jumpForce += 25.0
-                }else{
+                }
+                else{
                     self.jumpForce = Constants.maxJumpForce
-                    self.jump(runner: self.player!, force: Constants.maxJumpForce)
+                    self.jump(runner: self.playerRunner!, force: Constants.maxJumpForce)
                 }
             })
             let sequence = SKAction.sequence([timerAction, update])
@@ -226,10 +241,11 @@ class GameScene: SKScene {
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-        self.removeAction(forKey: "holdJump")
-        self.jump(runner: player!, force: self.jumpForce)
-        self.jumpForce = Constants.minJumpForce
+        removeAction(forKey: "holdJump")
+        if playerRunner != nil {
+            jump(runner: playerRunner!, force: self.jumpForce)
+        }
+        jumpForce = Constants.minJumpForce
 
     }
 
