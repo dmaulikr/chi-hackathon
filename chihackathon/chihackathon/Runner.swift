@@ -116,7 +116,7 @@ class Runner : Player, EventListenerNode, InteractiveNode {
         reset()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Constants.deadTimeout) {
             if self.timesDead > 5 {
-                self.lastSecureYPos = self.lastSecureYPos + 100
+                self.lastSecureYPos = self.lastSecureYPos + 1000
                 self.timesDead = 1
             }
         }

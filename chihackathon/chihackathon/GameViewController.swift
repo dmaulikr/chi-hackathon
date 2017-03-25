@@ -24,8 +24,9 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        gcManager.gameVC = self
-        addObservers()
+//        gcManager.gameVC = self
+//        addObservers()
+        presentGameScene()
     }
     
     deinit {

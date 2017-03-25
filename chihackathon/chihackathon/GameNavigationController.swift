@@ -16,8 +16,9 @@ class GameNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addObservers()
-        gcManager.authenticateLocalPlayer()
+//        addObservers()
+//        gcManager.authenticateLocalPlayer()
+//        
     }
     
     deinit {
