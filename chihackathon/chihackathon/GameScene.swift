@@ -27,7 +27,7 @@ struct PhysicsCategory {
     static let Missile: UInt32 = 0b100000 // 32
     static let SpeedTrap: UInt32 = 0b1000000 // 64
     static let Runner: UInt32 = 0b10000000 // 128
-    static let Finish: UInt32 = 0b100000000
+    static let Finish: UInt32 = 0b10010011
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -84,10 +84,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         for runner in runners {
             if runner == runner1 {
-                runner.position = CGPoint(x: 42200, y: 1450)
+                runner.position = CGPoint(x: 42200, y: 1500)
             }
             else if runner == runner2 {
-                runner.position = CGPoint(x: -200, y: 200)
+                runner.position = CGPoint(x: 42200, y: 1450)
             }
 
             runner.walkingCharacter()
@@ -104,6 +104,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         childNode(withName: "WinningBlock")?.physicsBody?.usesPreciseCollisionDetection = true
         childNode(withName: "WinningBlock")?.physicsBody?.categoryBitMask = PhysicsCategory.Finish
         childNode(withName: "WinningBlock")?.physicsBody?.collisionBitMask = PhysicsCategory.Finish | PhysicsCategory.Runner
+        childNode(withName: "WinningBlock")?.physicsBody?.contactTestBitMask = 0x1
     }
 
     private func setupBuilders() {
@@ -111,17 +112,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        
+        print("contact start")
         print(contact.bodyA)
         print(contact.bodyB)
+        print("contact end \n")
         
-        if ((contact.bodyA.categoryBitMask & PhysicsCategory.Runner) != 0 &&
-            (contact.bodyB.categoryBitMask & PhysicsCategory.Finish != 0)) {
-            let reveal = SKTransition.flipVertical(withDuration: 0.5)
-            let gameOverScene = GameOverScene(size: self.size, won: true)
-            self.view?.presentScene(gameOverScene, transition: reveal)
-            
+        let contactMask = contact.bodyA.contactTestBitMask | contact.bodyB.contactTestBitMask
+        
+        switch contactMask {
+        case PhysicsCategory.Runner | PhysicsCategory.Finish:
+            let winAction = SKAction.run(){
+                let reveal = SKTransition.flipVertical(withDuration: 0.5)
+                let gameOverScene = GameOverScene(size: self.size, won: true)
+                self.view?.presentScene(gameOverScene, transition: reveal)
+            }
+            run(winAction)
+
+        default:
+            return
         }
-        
     }
 
     private func assignPlayer() {
@@ -167,10 +177,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         for runner in runners {
-            if runner.position == childNode(withName: "Coin")!.position {
-                childNode(withName: "Coin")?.removeFromParent()
-                onCoinPickup(runner: runner)
-            }
             if runner.position.y < -2400 {
                 fall(runner: runner)
             }
@@ -224,7 +230,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             //sendJump(force: force)
 
-            //run(soundJump)
+            run(soundJump)
             runner.physicsBody?.applyImpulse(CGVector(dx: 0, dy: force))
         }
     }
@@ -243,7 +249,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func fall(runner: Runner){
-        //run(soundFall)
+        run(soundFall)
         runner.die()
     }
 
