@@ -116,8 +116,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if ((contact.bodyA.categoryBitMask & PhysicsCategory.Runner) != 0 &&
             (contact.bodyB.categoryBitMask & PhysicsCategory.Finish != 0)) {
-            let winnerRunner = contact.bodyA.node as! Runner
-            print("Game Over: " + winnerRunner.name! + " wins!")
+            let reveal = SKTransition.flipVertical(withDuration: 0.5)
+            let gameOverScene = GameOverScene(size: self.size, won: true)
+            self.view?.presentScene(gameOverScene, transition: reveal)
+            
         }
         
     }

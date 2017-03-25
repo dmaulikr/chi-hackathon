@@ -36,6 +36,8 @@
 		D4DF67411E85BCEB0013C8A2 /* Jump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */; };
 		D4DF67431E85BDF30013C8A2 /* Powerup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF67421E85BDF30013C8A2 /* Powerup.mp3 */; };
 		D4DF67451E860E950013C8A2 /* Falling.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF67441E860E950013C8A2 /* Falling.mp3 */; };
+		D4DF674C1E8648EA0013C8A2 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D4DF674B1E8648EA0013C8A2 /* GameOverScene.sks */; };
+		D4DF674E1E864B1B0013C8A2 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF674D1E864B1B0013C8A2 /* GameOverScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jump.mp3; sourceTree = "<group>"; };
 		D4DF67421E85BDF30013C8A2 /* Powerup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Powerup.mp3; sourceTree = "<group>"; };
 		D4DF67441E860E950013C8A2 /* Falling.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Falling.mp3; path = chihackathon/Falling.mp3; sourceTree = "<group>"; };
+		D4DF674B1E8648EA0013C8A2 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
+		D4DF674D1E864B1B0013C8A2 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,7 @@
 				3CF4FF171E856B7E00E192CB /* LaunchScreen.storyboard */,
 				3CF4FF121E856B7E00E192CB /* Main.storyboard */,
 				3CF4FF0A1E856B7E00E192CB /* GameScene.sks */,
+				D4DF674B1E8648EA0013C8A2 /* GameOverScene.sks */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				3CF4FF0E1E856B7E00E192CB /* GameScene.swift */,
+				D4DF674D1E864B1B0013C8A2 /* GameOverScene.swift */,
 				808796681E858270005B3BF8 /* Team.swift */,
 				D20025CE1E858274008A9E85 /* Runner.swift */,
 				D4DF673C1E858A260013C8A2 /* Builder.swift */,
@@ -275,6 +281,7 @@
 				D4DF67451E860E950013C8A2 /* Falling.mp3 in Resources */,
 				D4DF67431E85BDF30013C8A2 /* Powerup.mp3 in Resources */,
 				3CF4FF161E856B7E00E192CB /* Assets.xcassets in Resources */,
+				D4DF674C1E8648EA0013C8A2 /* GameOverScene.sks in Resources */,
 				3CF4FF191E856B7E00E192CB /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,6 +302,7 @@
 				D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */,
 				3C6AA8CD1E85837F00036772 /* GameCenterManager.swift in Sources */,
 				3C4A7A251E85A23D0032C7F2 /* SpeedBoost.swift in Sources */,
+				D4DF674E1E864B1B0013C8A2 /* GameOverScene.swift in Sources */,
 				3C4A7A2D1E85A2D90032C7F2 /* SpeedTrap.swift in Sources */,
 				3C4A7A211E85A2180032C7F2 /* Coin.swift in Sources */,
 				D20025CF1E858274008A9E85 /* Runner.swift in Sources */,
