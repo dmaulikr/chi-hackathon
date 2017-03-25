@@ -108,6 +108,12 @@ class GameScene: SKScene {
         }else {
             ableToJump = false
         }
+        
+//        for runner in runners! {
+//            if runner.position.y < 0 {
+//                fall(runner: runner)
+//            }
+//        }
     }
 
     private func calculateDT(currentTime: TimeInterval) -> TimeInterval {
@@ -121,16 +127,16 @@ class GameScene: SKScene {
 
         return dt
     }
+    
 
     private func updateRunnerPositions(dt: TimeInterval) {
-//        for runner in runners! {
-//           runner.position.x += 5
-//        }
+        for runner in runners! {
+           runner.position.x += 5
+        }
     }
 
     // MARK: Input
 
-    var initialJumpY: CGFloat?
     var ableToJump = true
     var jumpForce = CGFloat(200.0)
 
@@ -141,13 +147,18 @@ class GameScene: SKScene {
             runner.physicsBody?.applyImpulse(CGVector(dx: 0, dy: force))
         }
     }
+    
+    func fall(runner: Runner){
+            print(runner.position.y)
+            runner.die()
+    }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in (touches as! Set<UITouch> ){
+        for _ in (touches){
             let timerAction = SKAction.wait(forDuration: 0.05)
             let update = SKAction.run({
                 if(self.jumpForce < Constants.maxJumpForce){
-                    self.jumpForce += 2.0
+                    self.jumpForce += 15.0
                 }else{
                     self.jumpForce = Constants.maxJumpForce
                     self.jump(runner: self.runner1, force: Constants.maxJumpForce)
@@ -158,25 +169,12 @@ class GameScene: SKScene {
             self.run(repeatSeq, withKey: "holdJump")
         }
 
-//        if initialJumpY == nil {
-//            run(soundJump)
-//            initialJumpY = runner1.position.y
-//        }
-//
-//        if (runner1.position.y - initialJumpY!) < 600 {
-//            runner1.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
-//        }
-//        else {
-//            runner1.physicsBody?.velocity.dy = 0.0
-//        }
-//
-//        //self.onGround = false
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {}
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //runner1.physicsBody?.velocity.dy = 0.0
+        
         self.removeAction(forKey: "holdJump")
         self.jump(runner: runner1, force: self.jumpForce)
         
