@@ -59,9 +59,9 @@ class GameScene: SKScene {
     // MARK: Init
     override func didMove(to view: SKView) {
         gcManager.gameScene = self
-        
+
         //audioManager.playBackgroundMusic(filename: "Dreamcatcher")
-        
+
         physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         camera = runnerCamera
         lastUpdateTime = 0
@@ -101,10 +101,10 @@ class GameScene: SKScene {
             if GKLocalPlayer.localPlayer().playerID == player {
                 break
             }
-            
+
             index += 1
         }
-        
+
         if index == 0 {
             playerRunner = runner1
         }
@@ -126,20 +126,26 @@ class GameScene: SKScene {
         let dt = calculateDT(currentTime: currentTime)
 
         updateRunnerPositions(dt: dt)
-        print("\(runner1.physicsBody?.velocity.dy)")
-        
-        if playerRunner!.physicsBody?.velocity.dy == 0 {
-            ableToJump = true
+
+        if playerRunner != nil {
+            if playerRunner!.physicsBody?.velocity.dy == 0 {
+                ableToJump = true
+                playerRunner!.lastSecureYPos = playerRunner!.position.y
+            }
+            else {
+                ableToJump = false
+            }
         }
-        else {
-            ableToJump = false
+
+        for runner in runners {
+            if runner.position == childNode(withName: "Coin")!.position {
+                childNode(withName: "Coin")?.removeFromParent()
+                onCoinPickup(runner: runner)
+            }
+            if runner.position.y < -2400 {
+                fall(runner: runner)
+            }
         }
-        
-//        for runner in runners! {
-//            if runner.position.y < 0 {
-//                fall(runner: runner)
-//            }
-//        }
     }
 
     private func calculateDT(currentTime: TimeInterval) -> TimeInterval {
@@ -153,7 +159,7 @@ class GameScene: SKScene {
 
         return dt
     }
-    
+
 
     private func updateRunnerPositions(dt: TimeInterval) {
         for runner in runners {
@@ -184,14 +190,14 @@ class GameScene: SKScene {
     func jump(runner: Runner, force: CGFloat){
         if ableToJump == true {
             print(force)
-            
+
             sendJump(force: force)
-            
+
             run(soundJump)
             runner.physicsBody?.applyImpulse(CGVector(dx: 0, dy: force))
         }
     }
-    
+
     private func sendJump(force: CGFloat) {
         var message = ""
         if playerRunner == runner1 {
@@ -200,14 +206,13 @@ class GameScene: SKScene {
         else if playerRunner == runner2 {
             message = "runner2DidJump:\(force)"
         }
-        
+
         let data = NSKeyedArchiver.archivedData(withRootObject: message)
         gcManager.sendDataFast(data: data)
     }
-    
+
     func fall(runner: Runner){
-            print(runner.position.y)
-            runner.die()
+        runner.die()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -215,8 +220,9 @@ class GameScene: SKScene {
             let timerAction = SKAction.wait(forDuration: 0.05)
             let update = SKAction.run({
                 if(self.jumpForce < Constants.maxJumpForce){
-                    self.jumpForce += 15.0
-                }else{
+                    self.jumpForce += 25.0
+                }
+                else{
                     self.jumpForce = Constants.maxJumpForce
                     self.jump(runner: self.playerRunner!, force: Constants.maxJumpForce)
                 }
@@ -225,16 +231,15 @@ class GameScene: SKScene {
             let repeatSeq = SKAction.repeatForever(sequence)
             self.run(repeatSeq, withKey: "holdJump")
         }
-
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        self.removeAction(forKey: "holdJump")
-        self.jump(runner: playerRunner!, force: self.jumpForce)
-        
-        self.jumpForce = Constants.minJumpForce
-        
+        removeAction(forKey: "holdJump")
+        if playerRunner != nil {
+            jump(runner: playerRunner!, force: self.jumpForce)
+        }
+        jumpForce = Constants.minJumpForce
+
     }
 
 }

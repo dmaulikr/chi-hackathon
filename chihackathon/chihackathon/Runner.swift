@@ -14,10 +14,12 @@ class Runner : SKSpriteNode, EventListenerNode, InteractiveNode {
     
     var team: Team!
     var lastSafePosition = CGPoint()
+    var lastSecureYPos: CGFloat = 0
     var onGround = false
     var speedBoostEnabled = false
     var jumpBoostEnabled = false
     var gravity = 1.0
+    var timesDead = 0
     
     var characterWalkingFrames: [SKTexture]!
     
@@ -116,10 +118,18 @@ class Runner : SKSpriteNode, EventListenerNode, InteractiveNode {
     }
     
     func die() {
-        
+        timesDead += 1
+        reset()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Constants.deadTimeout) {
+            if self.timesDead > 5 {
+                self.lastSecureYPos = self.lastSecureYPos + 100
+                self.timesDead = 1
+            }
+        }
     }
     
     func reset() {
+        self.position.y = lastSecureYPos
         
     }
     

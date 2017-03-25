@@ -30,5 +30,6 @@ struct Constants {
     // Timeouts
     static let speedBoostTimeout: TimeInterval = 1.0
     static let jumpBoostTimeout: TimeInterval = 1.0
+    static let deadTimeout: TimeInterval = 15.0
 
 }
