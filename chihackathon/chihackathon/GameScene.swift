@@ -82,7 +82,7 @@ class GameScene: SKScene {
             runner.physicsBody?.allowsRotation = false
 
             if runner == runner1 {
-                runner.position = CGPoint(x: 100, y: 200)
+                runner.position = CGPoint(x: 0, y: 200)
             }
             else {
                 runner.position = CGPoint(x: 0, y: 200)
@@ -99,18 +99,22 @@ class GameScene: SKScene {
         let dt = calculateDT(currentTime: currentTime)
 
         updateRunnerPositions(dt: dt)
-        print("\(runner1.physicsBody?.velocity.dy)")
         if runner1.physicsBody?.velocity.dy == 0 {
             ableToJump = true
+            runner1.lastSecureYPos = runner1.position.y
         }else {
             ableToJump = false
         }
         
-//        for runner in runners! {
-//            if runner.position.y < 0 {
-//                fall(runner: runner)
-//            }
-//        }
+        for runner in runners! {
+            if runner.position == childNode(withName: "Coin")!.position {
+                childNode(withName: "Coin")?.removeFromParent()
+                onCoinPickup(runner: runner)
+            }
+            if runner.position.y < -2400 {
+                fall(runner: runner)
+            }
+        }
     }
 
     private func calculateDT(currentTime: TimeInterval) -> TimeInterval {
@@ -146,7 +150,6 @@ class GameScene: SKScene {
     }
     
     func fall(runner: Runner){
-            print(runner.position.y)
             runner.die()
     }
 
@@ -155,7 +158,7 @@ class GameScene: SKScene {
             let timerAction = SKAction.wait(forDuration: 0.05)
             let update = SKAction.run({
                 if(self.jumpForce < Constants.maxJumpForce){
-                    self.jumpForce += 15.0
+                    self.jumpForce += 25.0
                 }else{
                     self.jumpForce = Constants.maxJumpForce
                     self.jump(runner: self.runner1, force: Constants.maxJumpForce)
@@ -165,7 +168,6 @@ class GameScene: SKScene {
             let repeatSeq = SKAction.repeatForever(sequence)
             self.run(repeatSeq, withKey: "holdJump")
         }
-
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {}
@@ -174,7 +176,6 @@ class GameScene: SKScene {
         
         self.removeAction(forKey: "holdJump")
         self.jump(runner: runner1, force: self.jumpForce)
-        
         self.jumpForce = Constants.minJumpForce
         
     }

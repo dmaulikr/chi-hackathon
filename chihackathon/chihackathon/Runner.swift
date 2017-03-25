@@ -19,11 +19,14 @@ class Runner : Player, EventListenerNode, InteractiveNode {
     var speedBoostEnabled = false
     var jumpBoostEnabled = true
     var gravity = 1.0
+    var timesDead = 0
+    var lastSecureYPos: CGFloat
     
     //var character : SKSpriteNode!
     var characterWalkingFrames : [SKTexture]!
     
     override init(texture: SKTexture!, color: SKColor, size: CGSize, name: String, number: Int, team: Team) {
+        lastSecureYPos = 0.0
         super.init(texture: texture, color: color, size: size, name: name, number: number, team: team)
         
         //var characterWalkingFrames : [SKTexture]!
@@ -109,10 +112,18 @@ class Runner : Player, EventListenerNode, InteractiveNode {
     }
     
     func die() {
-        
+        timesDead += 1
+        reset()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Constants.deadTimeout) {
+            if self.timesDead > 5 {
+                self.lastSecureYPos = self.lastSecureYPos + 100
+                self.timesDead = 1
+            }
+        }
     }
     
     func reset() {
+        self.position.y = lastSecureYPos
         
     }
     
