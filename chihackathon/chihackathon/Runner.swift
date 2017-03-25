@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SpriteKit
 
-class Runner : Player {
+class Runner : Player, EventListenerNode, InteractiveNode {
     
     // MARK: - Variables
     var currentSpeed: Double = Constants.playerSpeed
@@ -20,8 +20,25 @@ class Runner : Player {
     var jumpBoostEnabled = true
     var gravity = 1.0
     
+    //var character : SKSpriteNode!
+    var characterWalkingFrames : [SKTexture]!
+    
     override init(texture: SKTexture!, color: SKColor, size: CGSize, name: String, number: Int, team: Team) {
         super.init(texture: texture, color: color, size: size, name: name, number: number, team: team)
+        
+        //var characterWalkingFrames : [SKTexture]!
+        let characterAnimatedAtlas = SKTextureAtlas(named: "PlayerCharacter")
+        var walkFrames = [SKTexture]()
+        
+        let numImages = characterAnimatedAtlas.textureNames.count
+        for i in 1..<numImages/2 {
+            let characterTextureName = "PlayerCharacter-\(i)@2x~ipad.png"
+            walkFrames.append(characterAnimatedAtlas.textureNamed(characterTextureName))
+        }
+        characterWalkingFrames = walkFrames
+        
+        let firstFrame = characterWalkingFrames[0]
+        self.texture = firstFrame
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,9 +68,18 @@ class Runner : Player {
     }
     
     
-    
-    
     // MARK: - Action methods
+    func walkingCharacter() {
+        //This is our general runAction method to make our character walk.
+        run(SKAction.repeatForever(
+            SKAction.animate(with: characterWalkingFrames,
+                                         timePerFrame: 0.1,
+                                         resize: false,
+                                         restore: true)),
+                            withKey:"walkingInPlaceCharacter")
+    }
+    
+    
     func applySpeedBoost() {
         // need start timer
         
@@ -102,6 +128,14 @@ class Runner : Player {
         currentSpeed = boostJump
     }
     
+    func didMoveToScene() {
+        isUserInteractionEnabled = true
+        parent!.physicsBody!.categoryBitMask = PhysicsCategory.Runner
+        parent!.physicsBody!.collisionBitMask = PhysicsCategory.Coin
+    }
     
+    func interact() {
+        
+    }
 }
 
