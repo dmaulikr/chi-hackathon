@@ -170,10 +170,12 @@ class Runner: SKSpriteNode {
     
     // MARK: Powerups
     func applySpeedBoost() {
-        sendSpeedBoostData()
-        speedBoostEnabled = true
-        speedBoostParticleEmitter.run(SKAction.fadeIn(withDuration: 0.1))
-        speedBoostTimer = Timer.scheduledTimer(timeInterval: Constants.speedBoostTimeout, target: self, selector: #selector(removeSpeedBoost), userInfo: nil, repeats: false)
+        if !speedBoostEnabled {
+            sendSpeedBoostData()
+            speedBoostEnabled = true
+            speedBoostParticleEmitter.run(SKAction.fadeIn(withDuration: 0.1))
+            speedBoostTimer = Timer.scheduledTimer(timeInterval: Constants.speedBoostTimeout, target: self, selector: #selector(removeSpeedBoost), userInfo: nil, repeats: false)
+        }
     }
     
     func removeSpeedBoost() {
@@ -183,10 +185,12 @@ class Runner: SKSpriteNode {
     }
     
     func applyJumpBoost() {
-        sendJumpBoostData()
-        jumpBoostEnabled = true
-        jumpBoostParticleEmitter.run(SKAction.fadeIn(withDuration: 0.1))
-        jumpBoostTimer = Timer.scheduledTimer(timeInterval: Constants.jumpBoostTimeout, target: self, selector: #selector(removeJumpBoost), userInfo: nil, repeats: false)
+        if !jumpBoostEnabled {
+            sendJumpBoostData()
+            jumpBoostEnabled = true
+            jumpBoostParticleEmitter.run(SKAction.fadeIn(withDuration: 0.1))
+            jumpBoostTimer = Timer.scheduledTimer(timeInterval: Constants.jumpBoostTimeout, target: self, selector: #selector(removeJumpBoost), userInfo: nil, repeats: false)
+        }
     }
     
     func removeJumpBoost() {

@@ -92,16 +92,16 @@ class GameScene: SKScene {
 
         for runner in runners {
             if runner == runner1 {
-                runner.position = CGPoint(x: -100, y: 300)
+                runner.position = CGPoint(x: -100, y: 550)
             }
             else if runner == runner2 {
-                runner.position = CGPoint(x: -200, y: 300)
+                runner.position = CGPoint(x: -200, y: 550)
             }
             else if runner == runner3 {
-                runner.position = CGPoint(x: -300, y: 200)
+                runner.position = CGPoint(x: -300, y: 550)
             }
             else if runner == runner4 {
-                runner.position = CGPoint(x: -400, y: 200)
+                runner.position = CGPoint(x: -400, y: 550)
             }
             
             addChild(runner)
@@ -148,7 +148,6 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         let dt = calculateDT(currentTime: currentTime)
 
-        checkForSafePlayerPosition()
         checkForPlayerRunnerDeath()
         updateRunnerPositions(dt: dt)
     }
@@ -165,14 +164,8 @@ class GameScene: SKScene {
         return dt
     }
     
-    private func checkForSafePlayerPosition() {
-        if playerRunner.onGround {
-            playerRunner.lastSafePosition = playerRunner.position
-        }
-    }
-    
     private func checkForPlayerRunnerDeath() {
-        if playerRunner.position.y <= -2400 {
+        if playerRunner.position.y <= -2500 {
             playerRunner.respawn()
             playerRunner.position = playerRunner.lastSafePosition
         }
@@ -244,16 +237,23 @@ extension GameScene: SKPhysicsContactDelegate {
             
             if let runnerNode = firstBody.node as? Runner {
                 if let groundNode = secondBody.node as? SKSpriteNode {
-                    runnerNode.onGround = true
                     
-//                    runnerNode.physicsBody?.velocity.dy = 0
-//                    runnerNode.position = CGPoint(x: runnerNode.position.x, y: groundNode.position.y + 10 + groundNode.size.height / 2)
-//                    
-//                    print(runnerNode.position.x)
-//                    print(groundNode.position.y)
-//                    print(groundNode.size.height / 2)
+                    print(runnerNode.positionInScene!.y - runnerNode.size.height / 2)
+                    print(groundNode.positionInScene!.y + groundNode.size.height / 2 - 5)
                     
-                    runnerNode.lastSafePosition = runnerNode.position
+                    let runnerNodeBottomY = runnerNode.position.y - runnerNode.size.height / 2
+                    let groundNodeTopY = groundNode.position.y + groundNode.size.height / 2
+                    
+                    if runnerNodeBottomY + 5 >= groundNodeTopY &&
+                        runnerNodeBottomY - 5 <= groundNodeTopY {
+                        runnerNode.onGround = true
+                        runnerNode.lastSafePosition = CGPoint(x: groundNode.position.x, y: groundNodeTopY + runnerNode.size.height / 2 + 5)
+                        
+                        print("Touching ground at safe pos: \(runnerNode.lastSafePosition)")
+                    }
+                    else {
+                        runnerNode.onGround = false
+                    }
                 }
             }
         }
@@ -277,3 +277,15 @@ extension GameScene: SKPhysicsContactDelegate {
     }
         
 }
+
+extension SKNode {
+    var positionInScene: CGPoint? {
+        if let scene = scene, let parent = parent {
+            return parent.convert(position, to:scene)
+        }
+        else {
+            return nil
+        }
+    }
+}
+
