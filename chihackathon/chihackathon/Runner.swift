@@ -72,6 +72,7 @@ class Runner : SKSpriteNode, EventListenerNode, InteractiveNode {
         
         let firstFrame = characterWalkingFrames[0]
         self.texture = firstFrame
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -123,7 +124,7 @@ class Runner : SKSpriteNode, EventListenerNode, InteractiveNode {
         reset()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Constants.deadTimeout) {
             if self.timesDead > 5 {
-                self.lastSecureYPos = self.lastSecureYPos + 100
+                self.lastSecureYPos = self.lastSecureYPos + 1000
                 self.timesDead = 1
             }
         }

@@ -28,6 +28,7 @@ struct PhysicsCategory {
     static let SpeedTrap: UInt32 = 0b1000000 // 64
     static let Runner: UInt32 = 0b10000000 // 128
     static let Edge: UInt32 = 0b100000000 // 256
+    static let Finish: UInt32 = 0b1000000000
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -38,7 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var lastUpdateTime: TimeInterval = 0
     var touched = false
-    
+
     var team1 = Team(id: 1, color: SKColor.red)
     var team2 = Team(id: 2, color: SKColor.blue)
 
@@ -46,7 +47,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var runner2: Runner!
     var runners = [Runner]()
     var playerRunner: Runner?
-    
+
     var builder1: Builder!
     var builder2: Builder!
     var builders = [Builder]()
@@ -56,6 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let soundCoin = SKAction.playSoundFileNamed("CoinPickup.mp3", waitForCompletion: true)
     let soundJump = SKAction.playSoundFileNamed("Jump.mp3", waitForCompletion: true)
     let soundPowerup = SKAction.playSoundFileNamed("Powerup.mp3", waitForCompletion: true)
+    let soundFall = SKAction.playSoundFileNamed("Falling.mp3", waitForCompletion: true)
 
     // MARK: Init
     override func didMove(to view: SKView) {
@@ -64,6 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //view.showsPhysics = true
         gcManager.gameScene = self
 
+        self.physicsWorld.contactDelegate = self
         //audioManager.playBackgroundMusic(filename: "Dreamcatcher")
 
         physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
@@ -101,14 +104,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         setupBuilders()
-        
+        setWinningBlock()
+
         assignPlayer()
     }
 
     private func setupRunners() {
         runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), team: team1, name: "P1")
         runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), team: team2, name: "P2")
-        
+
         runners = [runner1, runner2]
 
         for runner in runners {
@@ -120,15 +124,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 runner.name = "player2"
                 runner.position = CGPoint(x: -200, y: 200)
             }
-            
+
             runner.walkingCharacter()
+            runner.physicsBody?.usesPreciseCollisionDetection = true
+            runner.physicsBody?.categoryBitMask = PhysicsCategory.Runner
+            runner.physicsBody?.collisionBitMask = PhysicsCategory.Runner | PhysicsCategory.Finish
+            runner.physicsBody?.contactTestBitMask = PhysicsCategory.Runner | PhysicsCategory.Finish
             addChild(runner)
             break
         }
     }
     
+    private func setWinningBlock() {
+        childNode(withName: "WinningBlock")?.physicsBody = SKPhysicsBody(rectangleOf: (childNode(withName: "WinningBlock")!.frame.size))
+        childNode(withName: "WinningBlock")?.physicsBody?.usesPreciseCollisionDetection = true
+        childNode(withName: "WinningBlock")?.physicsBody?.categoryBitMask = PhysicsCategory.Finish
+        childNode(withName: "WinningBlock")?.physicsBody?.collisionBitMask = PhysicsCategory.Finish | PhysicsCategory.Runner
+        childNode(withName: "WinningBlock")?.physicsBody?.contactTestBitMask = 0x1
+    }
+
     private func setupBuilders() {
-        
+
     }
     
     private func assignPlayer() {
@@ -153,7 +169,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if index == 3 {
             playerBuilder = builder2
         }
-        
+
         playerRunner?.addChild(runnerCamera)
     }
 
@@ -173,10 +189,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         for runner in runners {
-            if runner.position == childNode(withName: "Coin")!.position {
-                childNode(withName: "Coin")?.removeFromParent()
-                onCoinPickup(runner: runner)
-            }
             if runner.position.y < -2400 {
                 fall(runner: runner)
             }
@@ -202,17 +214,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             runner.position.x += Constants.playerSpeed * runner.jumpMultiplier
         }
     }
-    
+
     private func onCoinPickup(runner: Runner){
         runner.pickUpCoin()
         run(soundCoin)
     }
-    
+
     private func onSpeedBoostPickup(runner: Runner){
         runner.applySpeedBoost()
         run(soundPowerup)
     }
-    
+
     private func onJumpBoostPickup(runner: Runner){
         runner.applyJumpBoost()
         run(soundPowerup)
@@ -231,7 +243,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             run(soundJump)
             runner.physicsBody?.applyImpulse(CGVector(dx: 0, dy: force))
-        }
+        } 
     }
 
     private func sendJump(force: CGFloat) {
@@ -248,6 +260,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func fall(runner: Runner){
+        run(soundFall)
         runner.die()
     }
 

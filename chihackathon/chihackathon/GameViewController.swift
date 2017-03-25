@@ -35,6 +35,7 @@ class GameViewController: UIViewController {
         
         gcManager.gameVC = self
         addObservers()
+//        presentGameScene()
     }
     
     deinit {
