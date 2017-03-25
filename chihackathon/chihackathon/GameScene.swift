@@ -114,8 +114,7 @@ class GameScene: SKScene {
         childNode(withName: "WinningBlock")?.physicsBody = SKPhysicsBody(rectangleOf: (childNode(withName: "WinningBlock")!.frame.size))
         childNode(withName: "WinningBlock")?.physicsBody?.usesPreciseCollisionDetection = true
         childNode(withName: "WinningBlock")?.physicsBody?.categoryBitMask = PhysicsCategory.Finish
-        childNode(withName: "WinningBlock")?.physicsBody?.collisionBitMask = PhysicsCategory.Finish | PhysicsCategory.Runner
-        childNode(withName: "WinningBlock")?.physicsBody?.contactTestBitMask = PhysicsCategory.Finish | PhysicsCategory.Runner
+        childNode(withName: "WinningBlock")?.physicsBody?.contactTestBitMask = PhysicsCategory.Runner
     }
 
     private func assignPlayer() {
@@ -274,6 +273,19 @@ extension GameScene: SKPhysicsContactDelegate {
             }
             
         }
+        if ((firstBody.categoryBitMask & PhysicsCategory.Runner != 0) &&
+            (secondBody.categoryBitMask & PhysicsCategory.Finish != 0)) {
+            if (contact.bodyA.node?.parent == nil || contact.bodyB.node?.parent == nil) {
+                return
+            }
+            let winAction = SKAction.run(){
+                let reveal = SKTransition.flipVertical(withDuration: 0.5)
+                let gameOverScene = GameOverScene(size: self.size, won: true)
+                self.view?.presentScene(gameOverScene, transition: reveal)
+            }
+            run(winAction)
+        }
+        
     }
         
 }
