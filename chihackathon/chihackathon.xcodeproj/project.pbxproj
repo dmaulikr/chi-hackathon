@@ -36,6 +36,7 @@
 		D4DF673F1E85B7450013C8A2 /* CoinPickup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF673E1E85B7450013C8A2 /* CoinPickup.mp3 */; };
 		D4DF67411E85BCEB0013C8A2 /* Jump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */; };
 		D4DF67431E85BDF30013C8A2 /* Powerup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF67421E85BDF30013C8A2 /* Powerup.mp3 */; };
+		D4DF67451E860E950013C8A2 /* Falling.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF67441E860E950013C8A2 /* Falling.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		D4DF673E1E85B7450013C8A2 /* CoinPickup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CoinPickup.mp3; path = chihackathon/CoinPickup.mp3; sourceTree = "<group>"; };
 		D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jump.mp3; sourceTree = "<group>"; };
 		D4DF67421E85BDF30013C8A2 /* Powerup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Powerup.mp3; sourceTree = "<group>"; };
+		D4DF67441E860E950013C8A2 /* Falling.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Falling.mp3; path = chihackathon/Falling.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 		D20025CC1E857B61008A9E85 /* Audio Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4DF67441E860E950013C8A2 /* Falling.mp3 */,
 				D4DF67421E85BDF30013C8A2 /* Powerup.mp3 */,
 				D4DF673E1E85B7450013C8A2 /* CoinPickup.mp3 */,
 				D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */,
@@ -272,6 +275,7 @@
 				3CF4FF0B1E856B7E00E192CB /* GameScene.sks in Resources */,
 				D4DF673F1E85B7450013C8A2 /* CoinPickup.mp3 in Resources */,
 				D20025CB1E857B41008A9E85 /* Dreamcatcher.mp3 in Resources */,
+				D4DF67451E860E950013C8A2 /* Falling.mp3 in Resources */,
 				D4DF67431E85BDF30013C8A2 /* Powerup.mp3 in Resources */,
 				3CF4FF161E856B7E00E192CB /* Assets.xcassets in Resources */,
 				3CF4FF191E856B7E00E192CB /* LaunchScreen.storyboard in Resources */,

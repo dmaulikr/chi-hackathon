@@ -41,25 +41,35 @@ class GameScene: SKScene {
     var runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), name: "runner1", number: 1, team: Team(id: 1))
     var runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), name: "runner2", number: 2, team: Team(id: 2))
     var runners: [Runner]?
-
+    
     var player: Runner?
+
 
     //Sounds
     let soundCoin = SKAction.playSoundFileNamed("CoinPickup.mp3", waitForCompletion: true)
     let soundJump = SKAction.playSoundFileNamed("Jump.mp3", waitForCompletion: true)
     let soundPowerup = SKAction.playSoundFileNamed("Powerup.mp3", waitForCompletion: true)
+    let soundFall = SKAction.playSoundFileNamed("Falling.mp3", waitForCompletion: true)
 
     // MARK: Init
     override func didMove(to view: SKView) {
         gcManager.gameScene = self
 
         //audioManager.playBackgroundMusic(filename: "Dreamcatcher")
+        
+//        let cam1 = SKSpriteNode(imageNamed: "runnerCam")
+//        cam1.position = CGPoint(x: self.frame.midX, y: (self.frame.maxY - 50))
+//        cam1.setScale(0.1)
+//        self.addChild(cam1)
 
         physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         camera = runnerCamera
         lastUpdateTime = 0
-
+        
         setupRunners()
+        setupBuilders()
+        
+        
         runners?[0].walkingCharacter()
         runners?[1].walkingCharacter()
 
@@ -173,7 +183,7 @@ class GameScene: SKScene {
         if ableToJump == true {
             print(force)
 
-            sendJump(force: force)
+            //sendJump(force: force)
 
             run(soundJump)
             runner.physicsBody?.applyImpulse(CGVector(dx: 0, dy: force))
@@ -194,7 +204,8 @@ class GameScene: SKScene {
     }
 
     func fall(runner: Runner){
-            runner.die()
+        run(soundFall)
+        runner.die()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
