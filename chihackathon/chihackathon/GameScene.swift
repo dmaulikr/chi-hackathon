@@ -73,8 +73,8 @@ class GameScene: SKScene {
     }
 
     private func setupRunners() {
-        runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), team: team1, name: gcManager.players![0].displayName!)
-        runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), team: team2, name: gcManager.players![1].displayName!)
+        runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), team: team1, name: "P1")
+        runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), team: team2, name: "P2")
         
         runners = [runner1, runner2]
 
