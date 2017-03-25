@@ -26,6 +26,8 @@
 		3CF4FF191E856B7E00E192CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF171E856B7E00E192CB /* LaunchScreen.storyboard */; };
 		808796691E858270005B3BF8 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808796681E858270005B3BF8 /* Team.swift */; };
 		8087966B1E85A783005B3BF8 /* Interactables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8087966A1E85A783005B3BF8 /* Interactables.swift */; };
+		A11F2D921E8640EC00A630D5 /* Tile Set.sks in Resources */ = {isa = PBXBuildFile; fileRef = A11F2D911E8640EC00A630D5 /* Tile Set.sks */; };
+		A11F2D941E86481200A630D5 /* tiles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = A11F2D931E86481200A630D5 /* tiles.atlas */; };
 		D20025C91E857A73008A9E85 /* BackgroundAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025C81E857A73008A9E85 /* BackgroundAudio.swift */; };
 		D20025CB1E857B41008A9E85 /* Dreamcatcher.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */; };
 		D20025CF1E858274008A9E85 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025CE1E858274008A9E85 /* Runner.swift */; };
@@ -59,6 +61,8 @@
 		3CF4FF1A1E856B7E00E192CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		808796681E858270005B3BF8 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		8087966A1E85A783005B3BF8 /* Interactables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactables.swift; sourceTree = "<group>"; };
+		A11F2D911E8640EC00A630D5 /* Tile Set.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "Tile Set.sks"; sourceTree = "<group>"; };
+		A11F2D931E86481200A630D5 /* tiles.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = tiles.atlas; sourceTree = "<group>"; };
 		D20025C81E857A73008A9E85 /* BackgroundAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAudio.swift; sourceTree = "<group>"; };
 		D20025CA1E857B41008A9E85 /* Dreamcatcher.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Dreamcatcher.mp3; path = chihackathon/Dreamcatcher.mp3; sourceTree = "<group>"; };
 		D20025CE1E858274008A9E85 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
@@ -128,8 +132,10 @@
 		3C6AA8D31E85908700036772 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A11F2D931E86481200A630D5 /* tiles.atlas */,
 				D20025D21E85AEB2008A9E85 /* PlayerCharacter.atlas */,
 				3CF4FF151E856B7E00E192CB /* Assets.xcassets */,
+				A11F2D911E8640EC00A630D5 /* Tile Set.sks */,
 				D20025CC1E857B61008A9E85 /* Audio Files */,
 				3CF4FF1A1E856B7E00E192CB /* Info.plist */,
 			);
@@ -263,11 +269,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A11F2D941E86481200A630D5 /* tiles.atlas in Resources */,
 				D20025D31E85AEB2008A9E85 /* PlayerCharacter.atlas in Resources */,
 				3CF4FF141E856B7E00E192CB /* Main.storyboard in Resources */,
 				D4DF67411E85BCEB0013C8A2 /* Jump.mp3 in Resources */,
 				3CF4FF0B1E856B7E00E192CB /* GameScene.sks in Resources */,
 				D4DF673F1E85B7450013C8A2 /* CoinPickup.mp3 in Resources */,
+				A11F2D921E8640EC00A630D5 /* Tile Set.sks in Resources */,
 				D20025CB1E857B41008A9E85 /* Dreamcatcher.mp3 in Resources */,
 				D4DF67431E85BDF30013C8A2 /* Powerup.mp3 in Resources */,
 				3CF4FF161E856B7E00E192CB /* Assets.xcassets in Resources */,
