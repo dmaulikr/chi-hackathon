@@ -10,6 +10,7 @@ import Foundation
 
 class Team {
     
+    private var id: Int
     private var coins = 0
     var time = 0
     
@@ -20,6 +21,10 @@ class Team {
         case yellow
         case orange
         case purple
+    }
+    
+    init(id: Int){
+        self.id = id
     }
     
     func getCoins() -> Int {
