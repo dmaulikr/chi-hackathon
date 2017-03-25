@@ -51,6 +51,7 @@ class Runner : SKSpriteNode, EventListenerNode, InteractiveNode {
         
         let labelNode = SKLabelNode()
         labelNode.position.y = 40
+        labelNode.fontColor = team.color
         labelNode.text = name
         addChild(labelNode)
         
