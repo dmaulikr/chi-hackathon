@@ -8,12 +8,12 @@
 
 import SpriteKit
 
-class Interactables: SKSpriteNode, EventListenerNode {
+class Interactables: SKSpriteNode {
     func didMoveToScene() {
         isUserInteractionEnabled = true
     }
     
     func interact() {
-        isUserInteractionEnabled = false
+        isUserInteractionEnabled = true
     }
 }

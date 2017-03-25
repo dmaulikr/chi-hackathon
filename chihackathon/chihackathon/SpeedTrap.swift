@@ -9,5 +9,5 @@
 import SpriteKit
 
 class SpeedTrap: Interactables {
-
+    
 }

@@ -16,7 +16,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var authLabel: UILabel!
     @IBOutlet weak var builderView: UIView!
-    
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var dropPlatformButton: UIButton!
     @IBOutlet weak var dropSpeedBoostButton: UIButton!
     @IBOutlet weak var dropJumpBoostButton: UIButton!
@@ -29,15 +29,25 @@ class GameViewController: UIViewController {
     let audioManager = AudioManager.sharedInstance
     let leaderboardID = ""
     
+    var timer = Timer()
+    var totalTimeElapsed: TimeInterval = 0
+    
+    var gameScene: GameScene?
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        timeLabel.alpha = 0
+        builderView.alpha = 0
+        
         gcManager.gameVC = self
         addObservers()
+        //presentGameScene()
     }
     
     deinit {
+        timer.invalidate()
         removeObservers()
     }
     
@@ -54,6 +64,9 @@ class GameViewController: UIViewController {
         UIView.animate(withDuration: 0.25, animations: {
             self.activityIndicator.alpha = 0
             self.authLabel.alpha = 0
+            
+            self.timeLabel.alpha = 1
+            self.builderView.alpha = 1
         })
     }
     
@@ -68,25 +81,32 @@ class GameViewController: UIViewController {
                 view.ignoresSiblingOrder = true
                 
                 view.presentScene(scene)
+                
+                gameScene = scene as? GameScene
+                startTimer()
             }
         }
     }
     
-    @IBAction func didTapDropPlatformButton(_ sender: Any) {
+    // MARK: UI
+    func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
+    func updateTimer() {
+        totalTimeElapsed += timer.timeInterval
+        timeLabel.text = String(totalTimeElapsed)
+    }
+    
+
     @IBAction func didTapDropSpeedBoostButton(_ sender: Any) {
+        gameScene?.applySpeedBoost()
     }
     
     @IBAction func didTapDropJumpBoostButton(_ sender: Any) {
+        gameScene?.applyJumpBoost()
     }
-    
-    @IBAction func didTapToggleCameraButton(_ sender: Any) {
-    }
-    
-    @IBAction func didTapDropWallButton(_ sender: Any) {
-    }
-    
+
     @IBAction func didTapDropTrapButton(_ sender: Any) {
     }
     

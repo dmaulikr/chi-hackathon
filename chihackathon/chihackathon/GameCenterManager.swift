@@ -127,6 +127,8 @@ class GameCenterManager: NSObject {
     }
     
     func assignPlayers() {
+        print("Assigning players...")
+        
         let randomNumbers = playersRandomNumbers.values
         let sortedNumbers = randomNumbers.sorted()
         
@@ -141,6 +143,7 @@ class GameCenterManager: NSObject {
             index += 1
         }
         
+        print("Starting game...")
         gameVC?.presentGameScene()
     }
     
@@ -164,8 +167,6 @@ class GameCenterManager: NSObject {
             //endMatch()
         }
     }
-    
-    
     
 }
 
@@ -196,26 +197,6 @@ extension GameCenterManager: GKMatchmakerViewControllerDelegate {
 
 extension GameCenterManager: GKMatchDelegate {
     
-    func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
-        if match != self.match {
-            return
-        }
-        let dictionary = NSKeyedUnarchiver.unarchiveObject(with: data)
-        print(dictionary)
-        
-        // TODO - do stuff with the data!
-    }
-    
-    func match(_ match: GKMatch, didReceive data: Data, fromPlayer playerID: String) {
-        if match != self.match {
-            return
-        }
-        
-        let dictionary = NSKeyedUnarchiver.unarchiveObject(with: data)
-        print(dictionary)
-        // TODO - do stuff with the data!
-    }
-    
     func match(_ match: GKMatch, didReceive data: Data, forRecipient recipient: GKPlayer, fromRemotePlayer player: GKPlayer) {
         if match != self.match {
             return
@@ -225,21 +206,102 @@ extension GameCenterManager: GKMatchDelegate {
             if let playerID = player.playerID {
                 playersRandomNumbers[playerID] = dictionary[playerID]
                 
-                if playersRandomNumbers.count == players!.count + 1 {
-                    assignPlayers()
+                // TODO - fix nil crash
+                if players != nil {
+                    if playersRandomNumbers.count == players!.count + 1 {
+                        assignPlayers()
+                    }
                 }
             }
         }
         else if let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? String {
-            if (message.range(of: "runner1DidJump") != nil) {
-                if let force = Double(message.components(separatedBy: ":").last!) {
-                    gameScene?.runner1.physicsBody?.applyImpulse(CGVector(dx: 0, dy: CGFloat(force)))
-                }
+            checkForJumpMessage(message: message)
+            checkForJumpBoostMessage(message: message)
+            checkForSpeedBoostMessage(message: message)
+            //checkForRespawnMessage(message: message)
+        }
+    }
+    
+    private func checkForJumpMessage(message: String) {
+        if (message.range(of: "runner1DidJump") != nil) {
+            if let force = Double(message.components(separatedBy: ":").last!) {
+                gameScene?.runner1.physicsBody?.applyImpulse(CGVector(dx: 0, dy: CGFloat(force)))
             }
-            else if (message.range(of: "runner2DidJump") != nil) {
-                if let force = Double(message.components(separatedBy: ":").last!) {
-                    gameScene?.runner2.physicsBody?.applyImpulse(CGVector(dx: 0, dy: CGFloat(force)))
-                }
+        }
+        else if (message.range(of: "runner2DidJump") != nil) {
+            if let force = Double(message.components(separatedBy: ":").last!) {
+                gameScene?.runner2.physicsBody?.applyImpulse(CGVector(dx: 0, dy: CGFloat(force)))
+            }
+        }
+        else if (message.range(of: "runner3DidJump") != nil) {
+            if let force = Double(message.components(separatedBy: ":").last!) {
+                gameScene?.runner2.physicsBody?.applyImpulse(CGVector(dx: 0, dy: CGFloat(force)))
+            }
+        }
+        else if (message.range(of: "runner3DidJump") != nil) {
+            if let force = Double(message.components(separatedBy: ":").last!) {
+                gameScene?.runner2.physicsBody?.applyImpulse(CGVector(dx: 0, dy: CGFloat(force)))
+            }
+        }
+    }
+    
+    private func checkForJumpBoostMessage(message: String) {
+        if message == "runner1DidUseJumpBoost" {
+            gameScene?.runner1.applyJumpBoost()
+        }
+        else if message == "runner2DidUseJumpBoost" {
+            gameScene?.runner2.applyJumpBoost()
+        }
+        else if message == "runner3DidUseJumpBoost" {
+            gameScene?.runner3.applyJumpBoost()
+        }
+        else if message == "runner4DidUseJumpBoost" {
+            gameScene?.runner4.applyJumpBoost()
+        }
+    }
+    
+    private func checkForSpeedBoostMessage(message: String) {
+        if message == "runner1DidUseSpeedBoost" {
+            gameScene?.runner1.applySpeedBoost()
+        }
+        else if message == "runner2DidUseSpeedBoost" {
+            gameScene?.runner2.applySpeedBoost()
+        }
+        else if message == "runner3DidUseSpeedBoost" {
+            gameScene?.runner3.applySpeedBoost()
+        }
+        else if message == "runner4DidUseSpeedBoost" {
+            gameScene?.runner4.applySpeedBoost()
+        }
+    }
+    
+    private func checkForRespawnMessage(message: String) {
+        if (message.range(of: "runner1DidRespawn") != nil) {
+            if let positionString = message.components(separatedBy: ":").last {
+                let position = CGPointFromString(positionString)
+                gameScene?.runner1.respawn()
+                gameScene?.runner1.position = position
+            }
+        }
+        else if (message.range(of: "runner2DidRespawn") != nil) {
+            if let positionString = message.components(separatedBy: ":").last {
+                let position = CGPointFromString(positionString)
+                gameScene?.runner2.respawn()
+                gameScene?.runner2.position = position
+            }
+        }
+        else if (message.range(of: "runner3DidRespawn") != nil) {
+            if let positionString = message.components(separatedBy: ":").last {
+                let position = CGPointFromString(positionString)
+                gameScene?.runner3.respawn()
+                gameScene?.runner3.position = position
+            }
+        }
+        else if (message.range(of: "runner4DidRespawn") != nil) {
+            if let positionString = message.components(separatedBy: ":").last {
+                let position = CGPointFromString(positionString)
+                gameScene?.runner4.respawn()
+                gameScene?.runner4.position = position
             }
         }
     }
