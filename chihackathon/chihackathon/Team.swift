@@ -7,36 +7,18 @@
 //
 
 import Foundation
+import SpriteKit
 
 class Team {
     
-    private var id: Int
-    private var coins = 0
-    var time = 0
-    
-    enum color {
-        case blue
-        case green
-        case red
-        case yellow
-        case orange
-        case purple
-    }
-    
-    init(id: Int){
+    var id = 0
+    var color = SKColor.red
+    var time: TimeInterval = 0
+    var coins = 0
+
+    init(id: Int, color: SKColor) {
         self.id = id
-    }
-    
-    func getCoins() -> Int {
-        return self.coins
-    }
-    
-    func deductCoins(coinsToDeduct: Int) {
-        self.coins = self.coins - coinsToDeduct
-    }
-    
-    func addCoins(coinsToAdd: Int){
-        self.coins = self.coins + coinsToAdd
+        self.color = color
     }
     
 }

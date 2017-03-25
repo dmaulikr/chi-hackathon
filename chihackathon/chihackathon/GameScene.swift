@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import GameKit
 
 protocol EventListenerNode {
     func didMoveToScene()
@@ -37,10 +38,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var lastUpdateTime: TimeInterval = 0
     var touched = false
+    
+    var team1 = Team(id: 1, color: SKColor.red)
+    var team2 = Team(id: 2, color: SKColor.blue)
 
-    var runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), name: "runner1", number: 1, team: Team(id: 1))
-    var runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), name: "runner2", number: 2, team: Team(id: 2))
-    var runners: [Runner]?
+    var runner1: Runner!
+    var runner2: Runner!
+    var runners = [Runner]()
+    var playerRunner: Runner?
+    
+    var builder1: Builder!
+    var builder2: Builder!
+    var builders = [Builder]()
+    var playerBuilder: Builder?
 
     //Sounds
     let soundCoin = SKAction.playSoundFileNamed("CoinPickup.mp3", waitForCompletion: true)
@@ -51,15 +61,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         
         setUpPhysics()
-        view.showsPhysics = true
+        //view.showsPhysics = true
+        gcManager.gameScene = self
+
         //audioManager.playBackgroundMusic(filename: "Dreamcatcher")
+
+        physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         camera = runnerCamera
         lastUpdateTime = 0
 
-
         setupRunners()
-        runners?[0].walkingCharacter()
-//        runners?[1].walkingCharacter()
+        runners[0].walkingCharacter()
+        runners[1].walkingCharacter()
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -86,45 +99,62 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if collision == PhysicsCategory.Coin {
             print("SUCCESS")
         }
-    }
 
-    private func onCoinPickup(runner: Runner){
-        runner.pickUpCoin()
-        run(soundCoin)
-    }
-
-    private func onSpeedBoostPickup(runner: Runner){
-        runner.applySpeedBoost()
-        run(soundPowerup)
-    }
-
-    private func onJumpBoostPickup(runner: Runner){
-        runner.applyJumpBoost()
-        run(soundPowerup)
+        setupBuilders()
+        
+        assignPlayer()
     }
 
     private func setupRunners() {
+        runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), team: team1, name: "P1")
+        runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), team: team2, name: "P2")
+        
         runners = [runner1, runner2]
 
-        for runner in runners! {
-            runner.physicsBody = SKPhysicsBody(rectangleOf: runner.size)
-            runner.physicsBody?.affectedByGravity = true
-            runner.physicsBody?.allowsRotation = false
-
+        for runner in runners {
             if runner == runner1 {
                 runner.name = "player1"
-                runner.position = CGPoint(x: -300, y: 200)
+                runner.position = CGPoint(x: -100, y: 200)
             }
             else {
                 runner.name = "player2"
-                runner.position = CGPoint(x: -100, y: 200)
+                runner.position = CGPoint(x: -200, y: 200)
             }
             
+            runner.walkingCharacter()
             addChild(runner)
             break
         }
+    }
+    
+    private func setupBuilders() {
+        
+    }
+    
+    private func assignPlayer() {
+        var index = 0
+        for player in gcManager.playerAssignments {
+            if GKLocalPlayer.localPlayer().playerID == player {
+                break
+            }
 
-        runner1.addChild(runnerCamera)
+            index += 1
+        }
+
+        if index == 0 {
+            playerRunner = runner1
+        }
+        else if index == 1 {
+            playerRunner = runner2
+        }
+        else if index == 2 {
+            playerBuilder = builder1
+        }
+        else if index == 3 {
+            playerBuilder = builder2
+        }
+        
+        playerRunner?.addChild(runnerCamera)
     }
 
     // MARK: Update Loop
@@ -132,20 +162,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let dt = calculateDT(currentTime: currentTime)
 
         updateRunnerPositions(dt: dt)
-//        print("\(runner1.physicsBody?.velocity.dy)")
-        if runner1.physicsBody?.velocity.dy == 0 {
-            ableToJump = true
-        }else {
-            ableToJump = false
+        if playerRunner != nil {
+            if playerRunner!.physicsBody?.velocity.dy == 0 {
+                ableToJump = true
+                playerRunner!.lastSecureYPos = playerRunner!.position.y
+            }
+            else {
+                ableToJump = false
+            }
         }
-        
+
+        for runner in runners {
+            if runner.position == childNode(withName: "Coin")!.position {
+                childNode(withName: "Coin")?.removeFromParent()
+                onCoinPickup(runner: runner)
+            }
+            if runner.position.y < -2400 {
+                fall(runner: runner)
+            }
+        }
         setUpPhysics()
-        
-//        for runner in runners! {
-//            if runner.position.y < 0 {
-//                fall(runner: runner)
-//            }
-//        }
     }
 
     private func calculateDT(currentTime: TimeInterval) -> TimeInterval {
@@ -159,12 +195,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         return dt
     }
-    
+
 
     private func updateRunnerPositions(dt: TimeInterval) {
-        for runner in runners! {
-           runner.position.x += 5
+        for runner in runners {
+            runner.position.x += Constants.playerSpeed * runner.jumpMultiplier
         }
+    }
+    
+    private func onCoinPickup(runner: Runner){
+        runner.pickUpCoin()
+        run(soundCoin)
+    }
+    
+    private func onSpeedBoostPickup(runner: Runner){
+        runner.applySpeedBoost()
+        run(soundPowerup)
+    }
+    
+    private func onJumpBoostPickup(runner: Runner){
+        runner.applyJumpBoost()
+        run(soundPowerup)
     }
 
     // MARK: Input
@@ -175,14 +226,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func jump(runner: Runner, force: CGFloat){
         if ableToJump == true {
             print(force)
+
+            sendJump(force: force)
+
             run(soundJump)
             runner.physicsBody?.applyImpulse(CGVector(dx: 0, dy: force))
         }
     }
-    
+
+    private func sendJump(force: CGFloat) {
+        var message = ""
+        if playerRunner == runner1 {
+            message = "runner1DidJump:\(force)"
+        }
+        else if playerRunner == runner2 {
+            message = "runner2DidJump:\(force)"
+        }
+
+        let data = NSKeyedArchiver.archivedData(withRootObject: message)
+        gcManager.sendDataFast(data: data)
+    }
+
     func fall(runner: Runner){
-            print(runner.position.y)
-            runner.die()
+        runner.die()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -190,36 +256,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let timerAction = SKAction.wait(forDuration: 0.05)
             let update = SKAction.run({
                 if(self.jumpForce < Constants.maxJumpForce){
-                    self.jumpForce += 15.0
-                }else{
+                    self.jumpForce += 25.0
+                }
+                else{
                     self.jumpForce = Constants.maxJumpForce
-                    self.jump(runner: self.runner1, force: Constants.maxJumpForce)
+                    self.jump(runner: self.playerRunner!, force: Constants.maxJumpForce)
                 }
             })
             let sequence = SKAction.sequence([timerAction, update])
             let repeatSeq = SKAction.repeatForever(sequence)
             self.run(repeatSeq, withKey: "holdJump")
         }
-
     }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {}
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        self.removeAction(forKey: "holdJump")
-        self.jump(runner: runner1, force: self.jumpForce)
-        
-        self.jumpForce = Constants.minJumpForce
-        
-    }
+        removeAction(forKey: "holdJump")
+        if playerRunner != nil {
+            jump(runner: playerRunner!, force: self.jumpForce)
+        }
+        jumpForce = Constants.minJumpForce
 
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {}
+    }
     
     func setUpPhysics() {
         physicsWorld.contactDelegate = self
         physicsBody!.categoryBitMask = PhysicsCategory.None
-
+        
         enumerateChildNodes(withName: "//*", using: { node, _ in
             if let eventListenerNode = node as? EventListenerNode {
                 eventListenerNode.didMoveToScene()

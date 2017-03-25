@@ -9,43 +9,40 @@
 import Foundation
 import SpriteKit
 
-class Builder: Player {
-
-
-    override init(texture: SKTexture!, color: SKColor, size: CGSize, name: String, number: Int, team: Team) {
-        super.init(texture: texture, color: color, size: size, name: name, number: number, team: team)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+class Builder {
+    
+    var team: Team!
+    
+    init(team: Team) {
+        self.team = team
     }
 
     func canPlacePlatform() -> Bool {
-        return team.getCoins() > Constants.coinsNeededForPlatform
+        return team.coins > Constants.coinsNeededForPlatform
     }
 
     func canPlaceSpeedBoost() -> Bool {
-        return team.getCoins() > Constants.coinsNeededForSpeedBoost
+        return team.coins > Constants.coinsNeededForSpeedBoost
     }
 
     func canPlaceJumpBoost() -> Bool {
-        return team.getCoins() > Constants.coinsNeededForJumpBoost
+        return team.coins > Constants.coinsNeededForJumpBoost
     }
 
     func canPlaceWall() -> Bool {
-        return team.getCoins() > Constants.coinsNeededForWall
+        return team.coins > Constants.coinsNeededForWall
     }
 
     func canPlaceMissile() -> Bool {
-        return team.getCoins() > Constants.coinsNeededForMissile
+        return team.coins > Constants.coinsNeededForMissile
     }
 
     func canPlaceSpeedTrap() -> Bool {
-        return team.getCoins() > Constants.coinsNeededForSpeedTrap
+        return team.coins > Constants.coinsNeededForSpeedTrap
     }
 
-    func completeItemPlacement(coinAmount: Int){
-        team.deductCoins(coinsToDeduct: coinAmount)
+    func completeItemPlacement(cost: Int){
+        team.coins -= cost
     }
 
 }
