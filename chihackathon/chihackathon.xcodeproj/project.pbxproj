@@ -16,14 +16,11 @@
 		3C4A7A2D1E85A2D90032C7F2 /* SpeedTrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4A7A2C1E85A2D90032C7F2 /* SpeedTrap.swift */; };
 		3C6AA8CD1E85837F00036772 /* GameCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA8CC1E85837F00036772 /* GameCenterManager.swift */; };
 		3C6AA8D01E85865E00036772 /* GameNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA8CF1E85865E00036772 /* GameNavigationController.swift */; };
-		3CCBB23B1E863FEC00E69F89 /* RedFireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBB23A1E863FEC00E69F89 /* RedFireParticle.sks */; };
-		3CCBB23E1E865CCF00E69F89 /* BlueFireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBB23D1E865CCF00E69F89 /* BlueFireParticle.sks */; };
 		3CE3D4731E85751700BAB456 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE3D4721E85751700BAB456 /* GameKit.framework */; };
 		3CF4FF091E856B7E00E192CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF4FF081E856B7E00E192CB /* AppDelegate.swift */; };
 		3CF4FF0B1E856B7E00E192CB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF0A1E856B7E00E192CB /* GameScene.sks */; };
 		3CF4FF0F1E856B7E00E192CB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF4FF0E1E856B7E00E192CB /* GameScene.swift */; };
 		3CF4FF111E856B7E00E192CB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF4FF101E856B7E00E192CB /* GameViewController.swift */; };
-		3CF4FF141E856B7E00E192CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF121E856B7E00E192CB /* Main.storyboard */; };
 		3CF4FF161E856B7E00E192CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF151E856B7E00E192CB /* Assets.xcassets */; };
 		3CF4FF191E856B7E00E192CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF171E856B7E00E192CB /* LaunchScreen.storyboard */; };
 		808796691E858270005B3BF8 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808796681E858270005B3BF8 /* Team.swift */; };
@@ -35,6 +32,9 @@
 		D20025CF1E858274008A9E85 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025CE1E858274008A9E85 /* Runner.swift */; };
 		D20025D11E858461008A9E85 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20025D01E858461008A9E85 /* Constants.swift */; };
 		D20025D31E85AEB2008A9E85 /* PlayerCharacter.atlas in Resources */ = {isa = PBXBuildFile; fileRef = D20025D21E85AEB2008A9E85 /* PlayerCharacter.atlas */; };
+		D27569101E869A9C005D8339 /* BlueFireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = D275690E1E869A9C005D8339 /* BlueFireParticle.sks */; };
+		D27569111E869A9C005D8339 /* RedFireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = D275690F1E869A9C005D8339 /* RedFireParticle.sks */; };
+		D27569131E869D34005D8339 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CF4FF121E856B7E00E192CB /* Main.storyboard */; };
 		D4DF673D1E858A260013C8A2 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF673C1E858A260013C8A2 /* Builder.swift */; };
 		D4DF673F1E85B7450013C8A2 /* CoinPickup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF673E1E85B7450013C8A2 /* CoinPickup.mp3 */; };
 		D4DF67411E85BCEB0013C8A2 /* Jump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */; };
@@ -55,8 +55,6 @@
 		3C4A7A2C1E85A2D90032C7F2 /* SpeedTrap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedTrap.swift; sourceTree = "<group>"; };
 		3C6AA8CC1E85837F00036772 /* GameCenterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCenterManager.swift; sourceTree = "<group>"; };
 		3C6AA8CF1E85865E00036772 /* GameNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameNavigationController.swift; sourceTree = "<group>"; };
-		3CCBB23A1E863FEC00E69F89 /* RedFireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RedFireParticle.sks; sourceTree = "<group>"; };
-		3CCBB23D1E865CCF00E69F89 /* BlueFireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlueFireParticle.sks; sourceTree = "<group>"; };
 		3CE3D4721E85751700BAB456 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		3CF4FF051E856B7E00E192CB /* chihackathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chihackathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CF4FF081E856B7E00E192CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +74,9 @@
 		D20025CE1E858274008A9E85 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
 		D20025D01E858461008A9E85 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D20025D21E85AEB2008A9E85 /* PlayerCharacter.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerCharacter.atlas; sourceTree = "<group>"; };
+		D275690E1E869A9C005D8339 /* BlueFireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlueFireParticle.sks; sourceTree = "<group>"; };
+		D275690F1E869A9C005D8339 /* RedFireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RedFireParticle.sks; sourceTree = "<group>"; };
+		D27569121E869D1D005D8339 /* BlueFireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = BlueFireParticle.sks; path = chihackathon/BlueFireParticle.sks; sourceTree = "<group>"; };
 		D4DF673C1E858A260013C8A2 /* Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
 		D4DF673E1E85B7450013C8A2 /* CoinPickup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CoinPickup.mp3; path = chihackathon/CoinPickup.mp3; sourceTree = "<group>"; };
 		D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jump.mp3; sourceTree = "<group>"; };
@@ -146,6 +147,7 @@
 		3C6AA8D31E85908700036772 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D275690D1E869A4A005D8339 /* Particles */,
 				A11F2D931E86481200A630D5 /* tiles.atlas */,
 				D20025D21E85AEB2008A9E85 /* PlayerCharacter.atlas */,
 				3CF4FF151E856B7E00E192CB /* Assets.xcassets */,
@@ -154,15 +156,6 @@
 				3CF4FF1A1E856B7E00E192CB /* Info.plist */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		3CCBB23C1E8642EA00E69F89 /* Particles */ = {
-			isa = PBXGroup;
-			children = (
-				3CCBB23A1E863FEC00E69F89 /* RedFireParticle.sks */,
-				3CCBB23D1E865CCF00E69F89 /* BlueFireParticle.sks */,
-			);
-			name = Particles;
 			sourceTree = "<group>";
 		};
 		3CE3D46F1E8570E600BAB456 /* Frameworks */ = {
@@ -176,6 +169,7 @@
 		3CF4FEFC1E856B7E00E192CB = {
 			isa = PBXGroup;
 			children = (
+				D27569121E869D1D005D8339 /* BlueFireParticle.sks */,
 				3CF4FF071E856B7E00E192CB /* chihackathon */,
 				3CF4FF061E856B7E00E192CB /* Products */,
 				3CE3D46F1E8570E600BAB456 /* Frameworks */,
@@ -228,6 +222,15 @@
 				3C4A7A2E1E85A2F50032C7F2 /* Interactables */,
 			);
 			name = "Game Objects";
+			sourceTree = "<group>";
+		};
+		D275690D1E869A4A005D8339 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				D275690E1E869A9C005D8339 /* BlueFireParticle.sks */,
+				D275690F1E869A9C005D8339 /* RedFireParticle.sks */,
+			);
+			name = Particles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,11 +298,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D27569131E869D34005D8339 /* Main.storyboard in Resources */,
+				D27569101E869A9C005D8339 /* BlueFireParticle.sks in Resources */,
+				D27569111E869A9C005D8339 /* RedFireParticle.sks in Resources */,
 				A11F2D941E86481200A630D5 /* tiles.atlas in Resources */,
 				D20025D31E85AEB2008A9E85 /* PlayerCharacter.atlas in Resources */,
-				3CCBB23B1E863FEC00E69F89 /* RedFireParticle.sks in Resources */,
-				3CCBB23E1E865CCF00E69F89 /* BlueFireParticle.sks in Resources */,
-				3CF4FF141E856B7E00E192CB /* Main.storyboard in Resources */,
 				D4DF67411E85BCEB0013C8A2 /* Jump.mp3 in Resources */,
 				3CF4FF0B1E856B7E00E192CB /* GameScene.sks in Resources */,
 				D4DF673F1E85B7450013C8A2 /* CoinPickup.mp3 in Resources */,
