@@ -130,9 +130,9 @@ class Runner : Player, EventListenerNode, InteractiveNode {
     
     func didMoveToScene() {
         isUserInteractionEnabled = true
-        parent!.physicsBody!.categoryBitMask = PhysicsCategory.Runner
-        parent!.physicsBody!.collisionBitMask = PhysicsCategory.Coin//PhysicsCategory.Coin | PhysicsCategory.Runner
-        parent!.physicsBody!.contactTestBitMask = PhysicsCategory.Coin
+        physicsBody?.categoryBitMask = PhysicsCategory.Runner
+        physicsBody?.collisionBitMask = PhysicsCategory.Coin//PhysicsCategory.Coin | PhysicsCategory.Runner
+        physicsBody?.contactTestBitMask = PhysicsCategory.Coin
     }
     
     func interact() {

@@ -65,9 +65,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
-        print("COLLISION")
-        print(contact.bodyA)
-        print(contact.bodyB)
+//        print("COLLISION")
+//        print(collision)
+//        print(PhysicsCategory.Coin | PhysicsCategory.Runner)
+//        print(contact.bodyA.node?.name)
+//        
+//        print(contact.bodyB.node?.name)
         
         if collision == PhysicsCategory.Coin | PhysicsCategory.Runner {
             
@@ -214,24 +217,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {}
     
     func setUpPhysics() {
-//        let maxAspectRatio: CGFloat = 16.0/9.0
-//        let maxAspectRatioHeight = size.width / maxAspectRatio
-//        let playableMargin: CGFloat = (size.height - maxAspectRatioHeight)/2
-        let playableRect = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: frame.size.height)
-        
-//        let height = (self.view! as SKView).bounds.height
-//        let width = (self.view! as SKView).bounds.width
-        
-        
-//        let playableRect = CGRect(x: 0, y: 0, width: width, height: height)
-        
-        
-        print("Playable Rect")
-        print(playableRect)
-        physicsBody = SKPhysicsBody(edgeLoopFrom: playableRect)
-
         physicsWorld.contactDelegate = self
-        physicsBody!.categoryBitMask = PhysicsCategory.Edge
+        physicsBody!.categoryBitMask = PhysicsCategory.None
 
         enumerateChildNodes(withName: "//*", using: { node, _ in
             if let eventListenerNode = node as? EventListenerNode {

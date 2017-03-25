@@ -14,9 +14,10 @@ class Coin: Interactables {
         super.didMoveToScene()
         isUserInteractionEnabled = true
         physicsBody = SKPhysicsBody(circleOfRadius: size.height/2)
-        parent!.physicsBody!.categoryBitMask = PhysicsCategory.Coin
-        parent!.physicsBody!.contactTestBitMask = PhysicsCategory.Runner
-        parent!.physicsBody!.collisionBitMask = PhysicsCategory.Runner
+        physicsBody?.affectedByGravity = false
+        physicsBody?.categoryBitMask = PhysicsCategory.Coin
+        physicsBody?.contactTestBitMask = PhysicsCategory.Runner
+        physicsBody?.collisionBitMask = PhysicsCategory.Runner
     }
     
     override func interact() {
