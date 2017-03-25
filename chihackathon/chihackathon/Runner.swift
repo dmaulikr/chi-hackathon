@@ -10,22 +10,52 @@ import Foundation
 import UIKit
 import SpriteKit
 
-class Runner : Player, EventListenerNode, InteractiveNode {
+class Runner : SKSpriteNode, EventListenerNode, InteractiveNode {
     
-    // MARK: - Variables
-    var currentSpeed: Double = Constants.playerSpeed
-    var onGround : Bool = true
-    var lastSafePosition : CGPoint?
+    var team: Team!
+    var lastSafePosition = CGPoint()
+    var onGround = false
     var speedBoostEnabled = false
-    var jumpBoostEnabled = true
+    var jumpBoostEnabled = false
     var gravity = 1.0
     
-    //var character : SKSpriteNode!
-    var characterWalkingFrames : [SKTexture]!
+    var characterWalkingFrames: [SKTexture]!
     
-    override init(texture: SKTexture!, color: SKColor, size: CGSize, name: String, number: Int, team: Team) {
-        super.init(texture: texture, color: color, size: size, name: name, number: number, team: team)
+    var speedMultiplier: CGFloat {
+        get {
+            if speedBoostEnabled {
+                return 1.5
+            }
+            else {
+                return 1
+            }
+        }
+    }
+    
+    var jumpMultiplier: CGFloat {
+        get {
+            if jumpBoostEnabled {
+                return 1.5
+            }
+            else {
+                return 1
+            }
+        }
+    }
+    
+    init(texture: SKTexture?, color: UIColor, size: CGSize, team: Team, name: String) {
+        super.init(texture: texture, color: color, size: size)
+        self.team = team
         
+        let labelNode = SKLabelNode()
+        labelNode.position.y = 40
+        labelNode.text = name
+        addChild(labelNode)
+        
+        physicsBody = SKPhysicsBody(rectangleOf: size)
+        physicsBody?.affectedByGravity = true
+        physicsBody?.allowsRotation = false
+
         //var characterWalkingFrames : [SKTexture]!
         let characterAnimatedAtlas = SKTextureAtlas(named: "PlayerCharacter")
         var walkFrames = [SKTexture]()
@@ -45,29 +75,6 @@ class Runner : Player, EventListenerNode, InteractiveNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var boostSpeed: Double {
-        get {
-            if speedBoostEnabled {
-                return currentSpeed * 1.5
-            }
-            else {
-                return Constants.playerSpeed
-            }
-        }
-    }
-    
-    var boostJump: Double {
-        get {
-            if jumpBoostEnabled {
-                return 0.75
-            }
-            else {
-                return Constants.gravity
-            }
-        }
-    }
-    
-    
     // MARK: - Action methods
     func walkingCharacter() {
         //This is our general runAction method to make our character walk.
@@ -85,7 +92,7 @@ class Runner : Player, EventListenerNode, InteractiveNode {
         
         // apply boost
         speedBoostEnabled = true
-        currentSpeed = boostSpeed
+        //currentSpeed = boostSpeed
         
         //timer end
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Constants.jumpBoostTimeout) {
@@ -96,7 +103,7 @@ class Runner : Player, EventListenerNode, InteractiveNode {
     
     func applyJumpBoost() {
         jumpBoostEnabled = true
-        gravity = boostJump
+        //gravity = boostJump
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Constants.jumpBoostTimeout) {
             self.endJumpBoost()
@@ -105,7 +112,7 @@ class Runner : Player, EventListenerNode, InteractiveNode {
     }
     
     func pickUpCoin() {
-        team.addCoins(coinsToAdd: 1)
+        team.coins += 1
     }
     
     func die() {
@@ -120,12 +127,12 @@ class Runner : Player, EventListenerNode, InteractiveNode {
     // MARK: - Private Methods
     private func endSpeedBoost() {
         speedBoostEnabled = false
-        currentSpeed = boostSpeed
+        //currentSpeed = boostSpeed
     }
     
     private func endJumpBoost() {
         jumpBoostEnabled = false
-        currentSpeed = boostJump
+        //currentSpeed = boostJump
     }
     
     func didMoveToScene() {
