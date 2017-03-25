@@ -27,9 +27,10 @@ struct PhysicsCategory {
     static let Missile: UInt32 = 0b100000 // 32
     static let SpeedTrap: UInt32 = 0b1000000 // 64
     static let Runner: UInt32 = 0b10000000 // 128
+    static let Finish: UInt32 = 0b100000000
 }
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
 
     let gcManager = GameCenterManager.sharedInstance
     let audioManager = AudioManager.sharedInstance
@@ -61,12 +62,8 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         gcManager.gameScene = self
 
+        self.physicsWorld.contactDelegate = self
         //audioManager.playBackgroundMusic(filename: "Dreamcatcher")
-
-//        let cam1 = SKSpriteNode(imageNamed: "runnerCam")
-//        cam1.position = CGPoint(x: self.frame.midX, y: (self.frame.maxY - 50))
-//        cam1.setScale(0.1)
-//        self.addChild(cam1)
 
         physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         camera = runnerCamera
@@ -74,6 +71,7 @@ class GameScene: SKScene {
 
         setupRunners()
         setupBuilders()
+        setWinningBlock()
 
         assignPlayer()
     }
@@ -86,19 +84,42 @@ class GameScene: SKScene {
 
         for runner in runners {
             if runner == runner1 {
-                runner.position = CGPoint(x: -100, y: 200)
+                runner.position = CGPoint(x: 42200, y: 1450)
             }
             else if runner == runner2 {
                 runner.position = CGPoint(x: -200, y: 200)
             }
 
             runner.walkingCharacter()
+            runner.physicsBody?.usesPreciseCollisionDetection = true
+            runner.physicsBody?.categoryBitMask = PhysicsCategory.Runner
+            runner.physicsBody?.collisionBitMask = PhysicsCategory.Runner | PhysicsCategory.Finish
+            runner.physicsBody?.contactTestBitMask = PhysicsCategory.Runner | PhysicsCategory.Finish
             addChild(runner)
         }
+    }
+    
+    private func setWinningBlock() {
+        childNode(withName: "WinningBlock")?.physicsBody = SKPhysicsBody(rectangleOf: (childNode(withName: "WinningBlock")!.frame.size))
+        childNode(withName: "WinningBlock")?.physicsBody?.usesPreciseCollisionDetection = true
+        childNode(withName: "WinningBlock")?.physicsBody?.categoryBitMask = PhysicsCategory.Finish
+        childNode(withName: "WinningBlock")?.physicsBody?.collisionBitMask = PhysicsCategory.Finish | PhysicsCategory.Runner
     }
 
     private func setupBuilders() {
 
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        print(contact.bodyA)
+        print(contact.bodyB)
+        
+        if ((contact.bodyA.categoryBitMask & PhysicsCategory.Runner) != 0 &&
+            (contact.bodyB.categoryBitMask & PhysicsCategory.Finish != 0)) {
+            let winnerRunner = contact.bodyA.node as! Runner
+            print("Game Over: " + winnerRunner.name! + " wins!")
+        }
+        
     }
 
     private func assignPlayer() {
@@ -152,6 +173,8 @@ class GameScene: SKScene {
                 fall(runner: runner)
             }
         }
+        
+        
     }
 
     private func calculateDT(currentTime: TimeInterval) -> TimeInterval {
@@ -199,7 +222,7 @@ class GameScene: SKScene {
 
             //sendJump(force: force)
 
-            run(soundJump)
+            //run(soundJump)
             runner.physicsBody?.applyImpulse(CGVector(dx: 0, dy: force))
         }
     }
@@ -218,7 +241,7 @@ class GameScene: SKScene {
     }
 
     func fall(runner: Runner){
-        run(soundFall)
+        //run(soundFall)
         runner.die()
     }
 

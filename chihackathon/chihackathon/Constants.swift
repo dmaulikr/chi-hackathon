@@ -12,9 +12,9 @@ import SpriteKit
 struct Constants {
     
     // Runner Constants
-    static let playerSpeed: CGFloat = 3
+    static let playerSpeed: CGFloat = 7
     static let gravity: CGFloat = 1.0
-    static let maxJumpForce: CGFloat = 250
+    static let maxJumpForce: CGFloat = 350
     static let minJumpForce: CGFloat = 150
     static let runnerCharacterWidth: Int = 69
     static let runnerCharacterHeight: Int = 69

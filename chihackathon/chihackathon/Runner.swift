@@ -72,6 +72,7 @@ class Runner : SKSpriteNode, EventListenerNode, InteractiveNode {
         
         let firstFrame = characterWalkingFrames[0]
         self.texture = firstFrame
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
