@@ -9,16 +9,22 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import GameKit
 
 class GameViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var authLabel: UILabel!
     
+    let gcManager = GameCenterManager.sharedInstance
+    let audioManager = AudioManager.sharedInstance
+    let leaderboardID = ""
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        gcManager.gameVC = self
         addObservers()
     }
     
@@ -40,12 +46,12 @@ class GameViewController: UIViewController {
             self.activityIndicator.alpha = 0
             self.authLabel.alpha = 0
         }, completion: { finished in
-            self.presentGameScene()
+            //        
         })
     }
     
-    // MARK: Navigation
-    private func presentGameScene() {
+    // MARK: Start Game
+    func presentGameScene() {
         if let scene = SKScene(fileNamed: "GameScene") {
             scene.scaleMode = .aspectFill
             
@@ -58,6 +64,5 @@ class GameViewController: UIViewController {
             }
         }
     }
-    
 
 }

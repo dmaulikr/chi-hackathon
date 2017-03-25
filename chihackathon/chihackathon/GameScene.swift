@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import GameKit
 
 class GameScene: SKScene {
     
@@ -19,18 +20,22 @@ class GameScene: SKScene {
     var runner1 = Runner(texture: SKTexture(imageNamed: "Runner"), color: SKColor.red, size: CGSize(width: 80, height: 80), name: "runner1", number: 1, team: Team())
     var runner2 = Runner(texture: SKTexture(imageNamed: "Runner"), color: SKColor.red, size: CGSize(width: 80, height: 80), name: "runner1", number: 1, team: Team())
     var runners: [Runner]?
+    
+    var player: Runner?
 
-    let soundCoin = SKAction.playSoundFileNamed("CoinPickup.mp3",
-                                                waitForCompletion: false)
+    let soundCoin = SKAction.playSoundFileNamed("CoinPickup.mp3", waitForCompletion: false)
     
     // MARK: Init
     override func didMove(to view: SKView) {
+        gcManager.gameScene = self
         audioManager.playBackgroundMusic(filename: "Dreamcatcher")
+        
+        physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         camera = runnerCamera
         lastUpdateTime = 0
 
-        
         setupRunners()
+        assignPlayer()
     }
     
     private func onCoinPickup(runner: Runner){
@@ -51,12 +56,31 @@ class GameScene: SKScene {
             }
             else {
                 runner.position = CGPoint(x: 0, y: 200)
+                runner.addChild(SKShapeNode(circleOfRadius: 50))
             }
             
             addChild(runner)
         }
+    }
+    
+    private func assignPlayer() {
+        var index = 0
+        for player in gcManager.playerAssignments {
+            if GKLocalPlayer.localPlayer().playerID == player {
+                break
+            }
+            
+            index += 1
+        }
         
-        runner1.addChild(runnerCamera)
+        if index == 0 {
+            player = runner1
+        }
+        else if index == 1 {
+            player = runner2
+        }
+        
+        player?.addChild(runnerCamera)
     }
     
     // MARK: Update Loop
@@ -88,17 +112,32 @@ class GameScene: SKScene {
     var initialJumpY: CGFloat?
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if initialJumpY == nil {
-            initialJumpY = runner1.position.y
+            initialJumpY = player!.position.y
         }
         
-        if (runner1.position.y - initialJumpY!) < 600 {
-            runner1.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
+        if (player!.position.y - initialJumpY!) < 600 {
+            player!.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 200))
         }
         else {
-            runner1.physicsBody?.velocity.dy = 0.0
+            player!.physicsBody?.velocity.dy = 0.0
         }
         
+        sendJump()
+        
         //self.onGround = false
+    }
+    
+    private func sendJump() {
+        var message = ""
+        if player == runner1 {
+            message = "runner1DidJump"
+        }
+        else if player == runner2 {
+            message = "runner2DidJump"
+        }
+        
+        let data = NSKeyedArchiver.archivedData(withRootObject: message)
+        gcManager.sendDataFast(data: data)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {}
