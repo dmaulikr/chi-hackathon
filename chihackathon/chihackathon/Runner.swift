@@ -20,11 +20,13 @@ class Runner : Player, EventListenerNode, InteractiveNode {
     var jumpBoostEnabled = true
     var gravity = 1.0
     
-    var character : SKSpriteNode!
+    //var character : SKSpriteNode!
     var characterWalkingFrames : [SKTexture]!
     
     override init(texture: SKTexture!, color: SKColor, size: CGSize, name: String, number: Int, team: Team) {
         super.init(texture: texture, color: color, size: size, name: name, number: number, team: team)
+        
+        //var characterWalkingFrames : [SKTexture]!
         let characterAnimatedAtlas = SKTextureAtlas(named: "PlayerCharacter")
         var walkFrames = [SKTexture]()
         
@@ -33,8 +35,10 @@ class Runner : Player, EventListenerNode, InteractiveNode {
             let characterTextureName = "PlayerCharacter-\(i)@2x~ipad.png"
             walkFrames.append(characterAnimatedAtlas.textureNamed(characterTextureName))
         }
-        
         characterWalkingFrames = walkFrames
+        
+        let firstFrame = characterWalkingFrames[0]
+        self.texture = firstFrame
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -67,9 +71,9 @@ class Runner : Player, EventListenerNode, InteractiveNode {
     // MARK: - Action methods
     func walkingCharacter() {
         //This is our general runAction method to make our character walk.
-        character.run(SKAction.repeatForever(
+        run(SKAction.repeatForever(
             SKAction.animate(with: characterWalkingFrames,
-                                         timePerFrame: 0.01,
+                                         timePerFrame: 0.1,
                                          resize: false,
                                          restore: true)),
                             withKey:"walkingInPlaceCharacter")

@@ -37,8 +37,8 @@ class GameScene: SKScene {
     var lastUpdateTime: TimeInterval = 0
     var touched = false
 
-    var runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: 40, height: 40), name: "runner1", number: 1, team: Team(id: 1))
-    var runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: 40, height: 40), name: "runner2", number: 2, team: Team(id: 2))
+    var runner1 = Runner(texture: SKTexture(), color: SKColor.red, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), name: "runner1", number: 1, team: Team(id: 1))
+    var runner2 = Runner(texture: SKTexture(), color: SKColor.blue, size: CGSize(width: Constants.runnerCharacterWidth, height: Constants.runnerCharacterHeight), name: "runner2", number: 2, team: Team(id: 2))
     var runners: [Runner]?
 
     //Sounds
@@ -87,11 +87,7 @@ class GameScene: SKScene {
             else {
                 runner.position = CGPoint(x: 0, y: 200)
             }
-
-            let firstFrame = runner.characterWalkingFrames[0]
-            runner.character = SKSpriteNode(texture: firstFrame)
-            addChild(runner.character)
-
+            
             addChild(runner)
         }
 
@@ -103,6 +99,7 @@ class GameScene: SKScene {
         let dt = calculateDT(currentTime: currentTime)
 
         updateRunnerPositions(dt: dt)
+        print("\(runner1.physicsBody?.velocity.dy)")
         if runner1.physicsBody?.velocity.dy == 0 {
             ableToJump = true
         }else {
@@ -143,11 +140,11 @@ class GameScene: SKScene {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in (touches as! Set<UITouch> ){
+        for _ in (touches){
             let timerAction = SKAction.wait(forDuration: 0.05)
             let update = SKAction.run({
                 if(self.jumpForce < Constants.maxJumpForce){
-                    self.jumpForce += 2.0
+                    self.jumpForce += 15.0
                 }else{
                     self.jumpForce = Constants.maxJumpForce
                     self.jump(runner: self.runner1, force: Constants.maxJumpForce)
