@@ -43,7 +43,13 @@ class GameViewController: UIViewController {
         
         gcManager.gameVC = self
         addObservers()
-        //presentGameScene()
+        
+        // Single-player debug
+        activityIndicator.alpha = 0
+        authLabel.alpha = 0
+        timeLabel.alpha = 1
+        builderView.alpha = 1
+        presentGameScene()
     }
     
     deinit {

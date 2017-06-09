@@ -76,7 +76,7 @@
 		D20025D21E85AEB2008A9E85 /* PlayerCharacter.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerCharacter.atlas; sourceTree = "<group>"; };
 		D275690E1E869A9C005D8339 /* BlueFireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlueFireParticle.sks; sourceTree = "<group>"; };
 		D275690F1E869A9C005D8339 /* RedFireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RedFireParticle.sks; sourceTree = "<group>"; };
-		D27569121E869D1D005D8339 /* BlueFireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = BlueFireParticle.sks; path = chihackathon/BlueFireParticle.sks; sourceTree = "<group>"; };
+		D27569121E869D1D005D8339 /* BlueFireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlueFireParticle.sks; sourceTree = "<group>"; };
 		D4DF673C1E858A260013C8A2 /* Builder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
 		D4DF673E1E85B7450013C8A2 /* CoinPickup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CoinPickup.mp3; path = chihackathon/CoinPickup.mp3; sourceTree = "<group>"; };
 		D4DF67401E85BCEB0013C8A2 /* Jump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jump.mp3; sourceTree = "<group>"; };
@@ -169,7 +169,6 @@
 		3CF4FEFC1E856B7E00E192CB = {
 			isa = PBXGroup;
 			children = (
-				D27569121E869D1D005D8339 /* BlueFireParticle.sks */,
 				3CF4FF071E856B7E00E192CB /* chihackathon */,
 				3CF4FF061E856B7E00E192CB /* Products */,
 				3CE3D46F1E8570E600BAB456 /* Frameworks */,
@@ -227,6 +226,7 @@
 		D275690D1E869A4A005D8339 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				D27569121E869D1D005D8339 /* BlueFireParticle.sks */,
 				D275690E1E869A9C005D8339 /* BlueFireParticle.sks */,
 				D275690F1E869A9C005D8339 /* RedFireParticle.sks */,
 			);

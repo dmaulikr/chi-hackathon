@@ -10,20 +10,20 @@ import SpriteKit
 
 class WinningBlock: Interactables {
     
-    override func didMoveToScene() {
-        super.didMoveToScene()
-        isUserInteractionEnabled = true
-        physicsBody = SKPhysicsBody(circleOfRadius: size.height/2)
-        physicsBody?.affectedByGravity = false
-        physicsBody?.categoryBitMask = PhysicsCategory.Finish
-        physicsBody?.contactTestBitMask = PhysicsCategory.Runner
-        physicsBody?.collisionBitMask = PhysicsCategory.Runner
-    }
-    
-    override func interact() {
-        super.interact()
-        print("INTERACTED")
-    }
+//    override func didMoveToScene() {
+//        super.didMoveToScene()
+//        isUserInteractionEnabled = true
+//        physicsBody = SKPhysicsBody(circleOfRadius: size.height/2)
+//        physicsBody?.affectedByGravity = false
+//        physicsBody?.categoryBitMask = PhysicsCategory.Finish
+//        physicsBody?.contactTestBitMask = PhysicsCategory.Runner
+//        physicsBody?.collisionBitMask = PhysicsCategory.Runner
+//    }
+//    
+//    override func interact() {
+//        super.interact()
+//        print("INTERACTED")
+//    }
     
 }
 

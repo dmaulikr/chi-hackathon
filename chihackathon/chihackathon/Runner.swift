@@ -81,8 +81,8 @@ class Runner: SKSpriteNode {
         physicsBody?.allowsRotation = false
         physicsBody?.usesPreciseCollisionDetection = true
         physicsBody?.categoryBitMask = PhysicsCategory.Runner
-        physicsBody?.contactTestBitMask = PhysicsCategory.Ground | PhysicsCategory.Coin
-        physicsBody?.collisionBitMask = PhysicsCategory.Ground
+        physicsBody?.contactTestBitMask = PhysicsCategory.Ground | PhysicsCategory.Coin //| PhysicsCategory.Finish
+        physicsBody?.collisionBitMask = PhysicsCategory.Ground //| PhysicsCategory.Finish
     }
     
     private func setTextures() {
@@ -140,7 +140,7 @@ class Runner: SKSpriteNode {
                 jumpForce *= jumpMultiplier
             }
         
-            sendJumpData(force: jumpForce)
+            //sendJumpData(force: jumpForce)
         
             physicsBody?.applyImpulse(CGVector(dx: 0, dy: jumpForce))
             onGround = false
@@ -157,7 +157,7 @@ class Runner: SKSpriteNode {
         sendRespawnData(position: lastSafePosition)
 
         deaths += 1
-        run(soundFall)
+        //run(soundFall)
         
         physicsBody?.velocity.dx = 0
         physicsBody?.velocity.dy = 0

@@ -16,9 +16,8 @@ class GameNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addObservers()
-        gcManager.authenticateLocalPlayer()
-        
+//        addObservers()
+//        gcManager.authenticateLocalPlayer()
     }
     
     deinit {
@@ -34,9 +33,7 @@ class GameNavigationController: UINavigationController {
     }
     
     // MARK: Notification Handlers
-    func showAuthenticationViewController() {
-        print(viewControllers)
-        
+    func showAuthenticationViewController() {        
         if gcManager.authVC != nil && topViewController != nil {
             topViewController!.present(gcManager.authVC!, animated: true, completion: nil)
         }

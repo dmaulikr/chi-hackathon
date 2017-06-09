@@ -159,6 +159,8 @@ class GameCenterManager: NSObject {
     }
     
     func sendDataFast(data: Data) {
+        guard match != nil else { return }
+        
         do {
             try match!.sendData(toAllPlayers: data, with: .unreliable)
         }
